@@ -1,0 +1,65 @@
+<app-header></app-header>
+
+<div class="content_alert" *ngIf="isSuccesfull">
+   Дані змінено успішно
+</div>  
+ <main>
+    <div class="content">
+              
+      <div class="content_setting">
+         <div class="content_setting_block">
+            <div class="content_block">
+            <div class="content_setting_block_list">
+               <div class="content_setting_block_header">
+                  <a href="profile">Профіль</a> 
+                </div>
+               <ul>
+                  <li><a href="favourite">Улюблені</a></li>
+                  <li><a href="accountSetting">Редагування</a></li>
+                  <li><a href="accountLoginAndPassword">Пароль і логін</a></li>
+                  <li><a href="#">Вийти</a></li>  
+               </ul>
+            </div>
+         </div>
+      </div>
+       </div>
+       <div class="content_account">
+            <div class="content_account_block_text">
+               <div class="content_account_block_text_img">
+                  <img *ngIf="isImg==false" alt="" src="../../assets/images/Anonimus.svg">
+                  <img  *ngIf="isImg==true" alt="" [src]="img">
+               </div>   
+               <div class="content_account_block_text_details">
+                  <div class="content_account_block_input_file">
+                     <label for="upload" class="file_input">Обрати файл</label>
+                     <input type="file" (change)="onFileSelected($event)" accept="image/png" id="upload" hidden/>
+                  </div>
+                  <div class="content_account_block_text_button_first">
+                   <button (click)="onLoadImage()">Загрузити</button>
+                  </div>
+                  <div class="content_account_block_text_button_second">
+                     <button (click)="onDeleteImage()">Видалити</button>
+                  </div> 
+               </div>
+         
+            </div>
+            <div class="content_account_form">
+               <form [formGroup]="updateForm" (ngSubmit)="Update()">
+                  <div class="content_account_block_form">
+                     <label for="surname">Прізвіще</label>
+                     <input type="text" [formControlName]="'surname'" value='{{User?.surname}}' class="surname">   
+                     <label for="name">Ім'я</label>
+                     <input type="text"[formControlName]="'name'" value='{{User?.name}}' class="name">  
+                     <label for="lastname">По батькові</label>
+                     <input type="text"[formControlName]="'lastname'" value='{{User?.lastname}}' class="lastname">  
+                     <label for="phone">Телефон</label>  
+                     <input type="text" [formControlName]="'phone'" value='{{User?.phone}}' class="phone">
+                     <input type="submit" value="Змінити">
+               </div>
+               </form>
+            </div>
+         </div>
+      </div>
+  
+ </main>
+ <app-footer></app-footer>

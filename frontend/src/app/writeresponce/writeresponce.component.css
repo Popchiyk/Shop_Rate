@@ -1,0 +1,602 @@
+main{
+   max-width: 1170px;
+   margin-left: 95px;
+}
+ul{
+   padding: 0;
+}
+
+.content_link_list{
+   max-width: 1170px;
+   height: 100%;
+   margin-top: 72px;
+   margin-left: 132px;
+}
+
+.content_link_list ul{
+  display: inline-flex;
+  list-style: none;
+}
+
+.content_link_list li{
+  margin-right: 59px;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.content_link_list a{
+  text-decoration: none;
+  color: #7A7A7A;
+  font-weight: 600;
+}
+
+.content_link_list li::after{
+   padding-left: 60px;
+   content: "|";
+   color: #D5D5D5;
+   font-weight: 100;
+}
+
+.content_link_list li:last-child::after{
+   content: " ";
+}
+
+
+.selectedLink a{
+   font-family: Montserrat;
+   font-style: normal;
+   font-weight: bold;
+   font-size: 24px;
+   line-height: 100%;
+   color: #474E95;
+}
+
+.shop_block{
+   width: 1250px;
+   height: 139px;
+   margin-top: 57px;
+   background: #FAFAFA;
+   box-shadow: 0px 15px 20px rgba(0, 0, 0, 0.05);
+}
+
+.shop_block_content{
+   display: flex;
+}
+
+.shop_block_content_img{
+   margin-top: 40px;
+   margin-left: 193px;
+}
+
+.shop_block_content_img img{
+   width: 312px;
+   height: 74px;
+}
+
+.shop_block_details_rating_block{
+   margin-top: 36px;
+   margin-left: 80px;
+   display: flex;
+   font-family: Montserrat;
+   font-style: normal;
+   font-weight: normal;
+   font-size: 14px;
+   line-height: 100%;
+   display: flex;
+   align-items: center;
+   color: #414040;
+}
+
+.shop_block_details_rating_block_number,.shop_block_details_rating_ball_block_number{
+   font-family: Montserrat;
+   font-style: normal;
+   font-weight: 600;
+   font-size: 24px;
+   line-height: 100%;
+   display: flex;
+   align-items: center;
+   color: #414040;
+   margin-right: 10px;
+}
+
+.shop_block_details_rating_img,.shop_block_details_rating_ball_block_img{
+   margin-right: 10px;
+}
+
+.img_user img{
+   width: 75px;
+   height: 75px;
+   border-radius: 60px;
+}
+
+.shop_block_details_rating_ball_block{
+   margin-top: 36px;
+   margin-left: 101px;
+   font-family: Montserrat;
+   font-style: normal;
+   font-weight: normal;
+   font-size: 14px;
+   line-height: 100%;
+   display: flex;
+   align-items: center;
+   color: #414040;
+}
+
+.shop_block_click{
+   width: 210px;
+   height: 43.91px;
+   margin-top: 56px;
+   margin-left: 96px;
+}
+
+.shop_block_click button{
+   width: 210px;
+   height: 43px;
+   border: 2px solid #F12E6D;
+   box-sizing: border-box;
+   border-radius: 50px;
+   font-family: Montserrat;
+   font-style: normal;
+   font-weight: 600;
+   background: transparent;
+   font-size: 12px;
+   line-height: 100%;
+   color: #F12E6D;
+   text-transform: uppercase;
+   margin-right: 20px;
+}
+
+.shop_block_click button:hover{
+   background-color: #F12E6D;
+   color: white;
+   filter: drop-shadow(0px 20px 50px rgba(0, 0, 0, 0.1));
+   transition: all 0.45s ease-out;
+}
+
+.content_responce{
+   margin-top: 84px;
+   margin-left: 150px;
+}
+
+.stats_user{
+   width: 269px;
+   height: 75px;
+   margin: 0 auto;
+   display: flex;
+}
+
+.login_user{
+   margin-left: 27px;
+   font-family: Montserrat;
+   font-style: normal;
+   font-weight: bold;
+   font-size: 24px;
+   line-height: 100%;
+   color: #000000;
+}
+
+.fullname_user{
+   font-family: Montserrat;
+   font-style: normal;
+   font-weight: normal;
+   font-size: 16px;
+   line-height: 100%;
+   color: #000000;
+   margin-top: 15px;
+}
+
+.responce_content_form{
+   width: 632px;
+   height: 645px;
+   margin: 0 auto;
+   margin-top: 32px;
+}
+.responce_declined{
+   margin: 0 auto;
+   width: 600px;
+   height: 296px;
+   text-align: center;
+}
+
+.responce_img{
+   margin-bottom: 62px;
+}
+
+.responce_text{
+   width: 600px;
+   height: 42px;
+   font-family: Montserrat;
+   font-style: normal;
+   font-weight: normal;
+   font-size: 16px;
+   line-height: 130%;
+   color: #000000;
+   margin-bottom: 64px;
+}
+
+.responce_button{
+   width: 600px;
+   height: 43px;
+}
+
+.responce_button button:first-child{
+   width: 150px;
+   height: 43px;
+   border: 2px solid #F12E6D;
+   background: transparent;
+   outline: none;
+   font-family: Montserrat;
+   font-style: normal;
+   font-weight: 600;
+   color: #F12E6D;
+   font-size: 12px;
+   line-height: 100%;
+   border-radius: 50px;
+   text-transform: uppercase;
+   margin-right: 30px;
+}
+
+.responce_button button:first-child:hover{
+   background-color: #F12E6D;
+   color: white;
+   filter: drop-shadow(0px 20px 50px rgba(0, 0, 0, 0.1));
+   transition: all 0.45s ease-out;
+}
+
+.responce_button button:last-child{
+   width: 175px;
+   height: 43px;
+   font-family: Montserrat;
+   font-style: normal;
+   font-weight: bold;
+   font-size: 12px;
+   line-height: 100%;
+   color: #7A7A7A;
+   background: transparent;
+   text-transform: uppercase;
+   border: 1px solid #7A7A7A;
+   border-radius: 50px;
+   outline: none;
+}
+
+.responce_button button:last-child:hover{
+   background-color: #7A7A7A;
+   color: white;
+   filter: drop-shadow(0px 20px 50px rgba(0, 0, 0, 0.1));
+   transition: all 0.45s ease-out;
+}
+
+.form_header{
+   font-family: Montserrat;
+   font-style: normal;
+   font-weight: 500;
+   font-size: 16px;
+   line-height: 100%;
+   color: #000000;
+   margin-bottom: 20px;
+}
+
+.form_stars{
+   width: 630px;
+   height: 36px;
+}
+
+.rating-area {
+	overflow: hidden;
+	width: 679px;
+}
+
+.rating-area:not(:checked) > input {
+	display: none;
+}
+
+.rating-area:not(:checked) > label {
+   float: right;
+   width: 42px;
+   padding: 0;
+   margin-right: 25px;
+   cursor: pointer;
+   font-size: 32px;
+   line-height: 32px;
+   color: lightgrey;
+}
+
+.rating-area:not(:checked) > label:before {
+	content: '\2605';
+}
+
+.rating-area > input:checked ~ label {
+	color: #F12E6D;
+}
+
+.rating-area:not(:checked) > label:hover,
+.rating-area:not(:checked) > label:hover ~ label {
+	color: #F12E6D;
+}
+
+.rating-area > input:checked + label:hover,
+.rating-area > input:checked + label:hover ~ label,
+.rating-area > input:checked ~ label:hover,
+.rating-area > input:checked ~ label:hover ~ label,
+.rating-area > label:hover ~ input:checked ~ label {
+	color: #F12E6D;
+}
+
+.rate-area > label:active {
+	position: relative;
+}
+
+.form_input{
+   margin-top: 32px;
+}
+
+.form_input label{
+   display: block;
+   margin-bottom: 8px;
+   font-family: Montserrat;
+   font-style: normal;
+   font-weight: 500;
+   font-size: 16px;
+   line-height: 100%;
+   color: #000000;
+}
+
+.form_input input[type=text]{
+   width: 630px;
+   height: 43px;
+   padding: 16px;
+   outline: none;
+   border: 0;
+   font-family: Montserrat;
+   font-style: normal;
+   font-weight: normal;
+   font-size: 16px;
+   line-height: 100%;
+   color: #000000;
+   background: #F2F2F2
+}
+
+.form_input input[type=text]:focus{
+   background: white
+}
+
+.form_textarea{
+   margin-top: 32px;
+}
+
+.form_textarea label{
+   display: block;
+   margin-bottom: 8px;
+}
+
+.form_textarea textarea{
+   width: 630px;
+   height: 273px;
+   outline: none;
+   padding-left: 15px;
+   padding-top: 10px;
+   background: #F2F2F2;
+   font-family: Montserrat;
+   font-style: normal;
+   font-weight: normal;
+   font-size: 16px;
+   line-height: 130%;
+   color: #000000;
+   border: 1px solid #D5D5D5;
+   box-sizing: border-box;
+   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.06);
+}
+
+textarea {
+   resize: none; 
+}
+
+.form_textarea textarea:focus{
+   background: #FFFFFF;
+}
+
+.form_checkbox{
+   margin-top: 32px;
+   display: flex;
+}
+
+.form_checkbox input[type=checkbox]{
+   width: 30px;
+   cursor: pointer;
+   outline: none;
+   height: 30px;
+}
+
+.form_checkbox input[type=checkbox]::after{
+   background: #F12E6D;
+   text-align: center;
+   width: 30px;
+   height: 30px;
+   content: "\2713";
+   font-size: 21px;
+   font-weight: bold;
+   color: white;
+   display: none;
+}
+
+.form_checkbox input[type=checkbox]:hover{
+   background-color: #a5a5a5;
+}
+
+.form_checkbox input[type=checkbox]:checked{
+   background: #F12E6D;
+}
+
+.form_checkbox input[type=checkbox]:checked::after{
+   display: block;
+}
+
+.form_checkbox_text{
+   margin: auto;
+   font-family: Montserrat;
+   font-style: normal;
+   font-weight: normal;
+   font-size: 16px;
+   line-height: 100%;
+   color: #000000;
+   margin-left: 22px;
+}
+
+.form_submit{
+   margin-top: 47px;
+   display: flex;
+}
+
+.form_submit input[type=submit]{
+   width: 150px;
+   height: 43px;
+   text-transform: uppercase  ;
+   margin-right: 30px;
+   border: 2px solid #F12E6D;
+   background: transparent;
+   cursor: pointer;
+   font-family: Montserrat;
+   font-style: normal;
+   font-weight: 600;
+   font-size: 12px;
+   line-height: 100%;
+   color: #F12E6D;
+   border-radius: 50px;
+}
+
+.form_submit input[type=submit]:hover{
+   background-color: #F12E6D;
+   color: white;
+   filter: drop-shadow(0px 20px 50px rgba(0, 0, 0, 0.1));
+   transition: all 0.45s ease-out;
+}
+
+.form_submit button{
+   width: 150px;
+   text-transform: uppercase;
+   height: 43px;
+   border: 2px solid #7A7A7A;
+   border-radius: 50px;
+   background: transparent;
+   font-family: Montserrat;
+   font-style: normal;
+   font-weight: 600;
+   font-size: 12px;
+   line-height: 100%;
+   color: #7A7A7A;
+}
+
+.form_submit button:hover{
+   background-color: #7A7A7A;
+   color: white;
+   filter: drop-shadow(0px 20px 50px rgba(0, 0, 0, 0.1));
+   transition: all 0.45s ease-out;
+}
+
+.content_alert{
+   text-align: center;
+   padding: 30px;
+   background: #7BEDAB;
+   font-family: Montserrat;
+   font-style: normal;
+   font-weight: 600;
+   font-size: 14px;
+   line-height: 100%;
+   color: #FAFAFA;
+}
+
+@media (min-width: 320px) and (max-width: 480px){
+
+   .content_link_list ul{
+      display: block;
+   }
+
+   main{
+      margin-left: 30px;
+   }
+
+   .content_link_list li{
+      width: 100%;
+      margin-bottom: 20px;
+   }
+
+   .shop_block{
+      width: 350px;
+      height: 320px;
+   }
+
+   .content_link_list li::after{
+      content: "";
+   }
+
+   .shop_block_content{
+      display: block;
+   }
+
+   .shop_block_content_img{
+      margin-left: 30px;
+   }
+
+   .shop_block_details_rating_ball_block{
+      margin-left: 81px;
+   }
+
+   .shop_block_content_img img{
+      margin-top: 20px;
+      
+   }
+
+   .content_responce{
+      margin-left: 0px;
+   }
+   
+   .form_input input[type=text], .form_textarea textarea{
+      width: 300px;
+   }
+
+   .form_stars{
+      width: 350px;
+      height: 68px;
+   }
+   
+   .form_textarea{
+      width: 350px;
+   }
+   form{
+      width: 350px;
+   }
+
+   .form_input{
+      width: 350px;
+   }
+
+   .rating-area{
+      width: 350px;
+      margin-bottom: 20px;
+   }
+
+   .rating-area:not(:checked) > label {
+      float: none;
+      width: 42px;
+      padding: 0;
+      margin-right: 25px;
+      cursor: pointer;
+      font-size: 32px;
+      line-height: 32px;
+      color: lightgrey;
+   }
+
+   .responce_content_form{
+      width: 350px;
+   }
+
+   .form_checkbox{
+      display: none;
+   }
+
+}

@@ -1,0 +1,90 @@
+<app-headingforadm></app-headingforadm>
+<div class="container">
+  <div class="alert alert-success" role="alert" *ngIf="isSuccesful" style="max-width: 500px;">
+    Дані було успішно додано
+  </div>
+</div>
+
+
+<main *ngIf="isAddInfoShop">
+   <div class="container">
+      <figure class="text-center">
+         <blockquote class="blockquote">
+           <p>Додавання до таблиці Магазину</p>
+         </blockquote>
+       </figure>
+      <form [formGroup]='formInfoShop' (ngSubmit)="AddToShop()">   
+         <div class="mb-3">
+           <label for="exampleInputText1"  class="form-label" >Назва магазину</label>
+           <input type="text" class="form-control"[formControlName]="'name'" id="exampleInputText1">
+         </div>
+         <div class="mb-3">
+            <label for="exampleInputText1"  class="form-label" >Телефон</label>
+            <input type="text" class="form-control"[formControlName]="'phone'" id="exampleInputText1">
+          </div>
+          <div class="mb-3">
+            <label for="exampleInputEmail1"  class="form-label" >Пошта</label>
+            <input type="email" class="form-control"[formControlName]="'email'" id="exampleInputEmail1">
+          </div>
+          <div class="mb-3">
+            <label for="exampleInputText1"  class="form-label" >Сайт</label>
+            <input type="text" class="form-control"[formControlName]="'website'" id="exampleInputText1">
+          </div>
+          <div class="mb-3">
+            <label for="exampleInputText1"  class="form-label" >Контакта людина</label>
+            <input type="text" class="form-control" [formControlName]="'contact_people'" id="exampleInputText1">
+          </div>
+          <div class="mb-3">
+            <label for="exampleInputText1"  class="form-label" >Категорія</label>
+            <select class="form-select"  [formControlName]="'kategory'" >
+               <option  *ngFor="let kategor of kategory" value="{{kategor.id_kategory}}">{{kategor.name_kategory}}</option>
+             </select>
+             </div>
+         <button type="submit" class="btn btn-primary">Додати</button>
+       </form>
+   </div>
+</main>
+
+
+<main *ngIf="isAddkategory">
+   
+   <div class="container">
+      <figure class="text-center">
+         <blockquote class="blockquote">
+           <p>Додавання до таблиці Категорій</p>
+         </blockquote>
+       </figure>
+      <form [formGroup]='formKategory' (ngSubmit)="AddToKategory()">   
+         <div class="mb-3">
+           <label for="exampleInputText1"  class="form-label" >Назва категорії</label>
+           <input type="text" class="form-control"[formControlName]="'name_kategory'" id="exampleInputText1">
+         </div>
+         <button type="submit" class="btn btn-primary">Додати</button>
+       </form>
+   </div>
+  
+  
+</main>
+<main *ngIf="isAddPhotoToShop">
+  <div class="container">
+   <figure class="text-center">
+     <blockquote class="blockquote">
+       <p>Додавання фотографію до магазину</p>
+     </blockquote>
+   </figure>
+   <form [formGroup]='formAddPhoto' (ngSubmit)="AddPhotoToShop()">
+   <div class="mb-3">
+    <label for="exampleInputText1"  class="form-label" >Список магазинів</label>
+    <select class="form-select" [formControlName]="'name_shop'"  >
+       <option  *ngFor="let Shops of shops" value="{{Shops.id}}">{{Shops.name_shop}}</option>
+     </select>
+     </div>
+   <div class="mb-3">
+     <label for="formFile" class="form-label">Оберіть лого </label>
+     <input class="form-control" type="file" id="formFile" accept="image/png" (change)="onFileSelected($event)" >
+   </div>
+<button type="submit" class="btn btn-primary">Додати</button>
+</form>
+  </div>
+</main>
+

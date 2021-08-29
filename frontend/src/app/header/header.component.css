@@ -1,0 +1,368 @@
+*{
+   padding: 0;
+   margin: 0;
+}
+
+
+
+.burger{
+   display: none;
+} 
+
+main{
+   max-width: 1170px;
+   margin: 0 auto;
+}
+
+button{
+   outline: none;
+}
+
+header{
+   width: 100%;
+   background: #474E95;
+}
+
+.container{
+   max-width: 1170px;
+  margin-left: 132px;
+}
+
+.nav-brand{
+   width: 100%;
+   display: flex;
+}
+
+.nav-brand-name{
+   font-family: Montserrat;
+   font-style: normal;
+   font-weight: bold;
+   font-size: 64px;
+   line-height: 85%;
+   color: white;
+   margin-top: 21px;
+   margin-bottom: 21px;
+}
+
+.nav-brand-name p{
+   margin-top: 7px;  
+   font-family: Montserrat;
+   font-style: normal;
+   font-weight: 100;
+   font-size: 64px;
+   line-height: 50%; 
+   color: white;
+}
+
+.nav-link{
+   display: inline-flex;
+   margin-left: 63px;
+}
+
+.nav-link-list{
+   margin-top: 48px;
+   margin-bottom: 90px;
+   margin-right: 40px;
+}
+
+.nav-link-list ul{
+   list-style: none;
+   display: inline-flex;
+}
+
+.nav-link-list li{
+   text-transform: uppercase;
+   font-family: Montserrat;
+   font-style: normal;
+   font-weight: bold;
+   font-size: 16px;
+   line-height: 20px;
+   display: flex;
+   align-items: center;
+   text-align: center;
+   color: #FFFFFF;
+   margin-right: 84px;
+}
+
+.nav-link-list a{
+   text-decoration: none;
+   color: #FFFFFF;
+}
+
+.nav-link-list-right{
+   margin-left: 100px;
+   text-align: right;
+   margin-top: 35px;
+   margin-bottom: 75px;
+}
+
+.nav-link-list-right ul{
+   list-style: none;
+   display: inline-flex;
+   width: 250px;
+}
+
+.nav-link-list-right li{
+   text-align: right;
+   font-family: Montserrat;
+   font-style: normal;
+   font-weight: bold;
+   font-size: 16px;
+   line-height: 20px;
+   display: flex;
+   align-items: center;
+   text-align: center;
+   color: white;
+}
+
+.nav-link-list-right li:last-child{
+   margin-right: 0;
+}
+
+.nav-link-list-right li{
+   margin-right: 40px;
+}
+
+.logo img{
+   width: 50px;
+   height: 50px;
+   border-radius: 60px;
+   cursor: pointer;
+}
+
+.username{
+   margin-left: 100px;
+}
+
+.logoanonimus{
+   width: 50px;
+   height: 50px;
+   border-radius: 60px;
+}
+
+.nav-link-list-right a{
+   text-decoration: none;
+   color: white;
+}
+
+.modal{
+left: 1150px;
+top:90px;
+}
+
+.modal-header{
+   margin-left: 29px;
+   margin-top: 40px;
+   font-family: Montserrat;
+   font-style: normal;
+   font-weight: bold;
+   font-size: 16px;
+   line-height: 20px;
+   color: #000000;
+   text-transform: uppercase;
+   padding-bottom: 14px;
+}
+.modal-header a{
+   text-decoration: none;
+   color: #000000;
+}
+.modal-header a:hover{
+   text-transform: uppercase;
+   background: url(../../assets/images/arrow.svg) no-repeat 100% ;
+   padding-right: 30px;
+   font-weight: bold;
+   transition: all 0.35s ease-out;
+}
+.modal-body ul{
+   list-style: none;
+}
+
+.logoForMobile{
+   display: flex;
+   margin-left: 20px;
+}
+
+.logoForMobile img{
+   border-radius: 50px;
+}
+
+.menu__item_in_logo{
+   display: block;
+   padding: 12px 24px;
+   color: #333;
+   font-family: Montserrat;
+   font-style: normal;
+   font-weight: bold;
+   font-size: 20px;
+   line-height: 20px;
+   color: #FFFFFF;
+   text-decoration: none;
+   transition-duration: .25s;
+}
+
+.modal-body li:first-child{
+   margin-top: 24px;
+}
+
+.modal-body li{
+   font-family: Montserrat;
+   font-style: normal;
+   font-weight: normal;
+   font-size: 16px;
+   line-height: 100%;
+   margin-left: 40px;
+   margin-bottom: 24px;  
+}
+.modal-body a{
+   text-decoration: none;
+   color: #000000;
+}
+
+.modal-body a:hover{
+   text-transform: uppercase;
+   background: url(../../assets/images/arrow.svg) no-repeat 100% ;
+   padding-right: 30px;
+   font-weight: bold;
+   transition: all 0.35s ease-out;
+}
+
+.modal-body li:last-child{
+   border-top: 1px solid #D5D5D5 ;
+   padding-top: 24px;
+   margin-bottom: 40px;
+}
+
+#menu__toggle {
+   opacity: 0;
+}
+    
+#menu__toggle:checked ~ .menu__btn > span {
+   transform: rotate(45deg);
+}
+   
+#menu__toggle:checked ~ .menu__btn > span::before {
+   top: 0;
+   transform: rotate(0);
+}
+   
+#menu__toggle:checked ~ .menu__btn > span::after {
+   top: 0;
+   transform: rotate(90deg);
+}
+   
+#menu__toggle:checked ~ .menu__box {
+   visibility: visible;
+   left: 200px;
+}
+    
+.menu__btn {
+   display: flex;
+   align-items: center;
+   position: absolute;
+   top: 30px;
+   left: 350px;
+   width: 26px;
+   height: 26px;
+   cursor: pointer;
+   z-index: 1001;
+}
+    
+.menu__btn > span,
+.menu__btn > span::before,
+.menu__btn > span::after {
+   display: block;
+   position: absolute;
+   width: 100%;
+   height: 2px;
+   background-color: #FFFFFF;
+   transition-duration: .25s;
+}
+   
+.menu__btn > span::before {
+   content: '';
+   top: -8px;
+}
+
+.menu__btn > span::after {
+   content: '';
+   top: 8px;
+}
+   
+.menu__box {
+   display: block;
+   position: absolute;
+   visibility: hidden;
+   top: 0;
+   left: -100%;
+   width: 220px;
+   height: 350px;
+   margin: 0;
+   z-index: 1000;
+   padding: 75px 0;
+   list-style: none;
+   background-color: #474E95;
+   box-shadow: 1px 0px 6px rgba(0, 0, 0, .2);
+   transition-duration: .25s;
+}
+    
+.menu__item {
+   display: block;
+   padding: 12px 24px;
+   color: #333;
+   font-family: Montserrat;
+   font-style: normal;
+   font-weight: bold;
+   font-size: 20px;
+   line-height: 20px;
+   color: #FFFFFF;
+   text-decoration: none;
+   transition-duration: .25s;
+}
+
+.menu__item:hover {
+   font-weight: normal;
+}
+
+@media (min-width: 320px) and (max-width: 480px) {
+   .nav-brand{
+      max-width: 480px;
+      overflow: hidden;
+   }
+
+   .container{
+      max-width: 480px;
+      overflow: hidden;
+      margin-left: 0;
+   }
+   header{
+      max-width: 480px;
+      overflow: hidden;
+   }
+
+   .nav-brand-name{
+      font-size: 30pt;
+      text-align: center;
+      margin-left:50px;
+   }
+
+   .nav-brand-name p::after{
+      margin-top: 50px;
+   }
+   .nav-brand-name p{
+      font-size: 30pt;
+   }
+
+   .burger{
+      display: block;
+      margin-left: 100px;
+      margin-top: 40px;
+   }
+   
+   .nav-link-list{
+      display: none;
+   }
+
+   .nav-link-list-right{
+      display: none;
+   }
+}

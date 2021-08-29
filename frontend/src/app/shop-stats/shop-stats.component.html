@@ -1,0 +1,188 @@
+<app-header></app-header>
+<div class="content_shop_list">
+   <div class="content_link_list"> 
+      <ul>
+         <li class="selectedLink"><a href="infoshop/{{shop?.id}}">Інформація</a></li>
+         <li><a href="allresponce/{{shop?.id}}">Всі відгуки</a></li>
+         <li><a href="writeresponce/{{shop?.id}}">Написати відгук</a></li>
+         <li><a href="favourite">Улюблені</a></li>
+      </ul>
+   </div>
+ </div>
+<main>
+   
+    <div class="shop_block">
+    <div class="shop_block_content">
+       <div class="shop_block_infoleft">
+        <ul>
+           <li><img alt="" [src]="shop?.logo"></li>
+           <li class="firstLi">{{shop?.id_Kategory['name_kategory']}}</li> 
+          
+        </ul>
+        <div class="shop_block_click">
+         <a href="writeresponce/{{shop?.id}}">Додати відгук</a>
+         <div class="favourite" *ngIf="shop?.subscribe">
+            <svg width="44" height="55" viewBox="0 0 44 55" fill="none" xmlns="http://www.w3.org/2000/svg">
+               <g filter="url(#filter0_d)">
+               <path d="M6 7.37509C6 5.94953 6.5619 4.58235 7.5621 3.57433C8.56229 2.5663 9.91885 2 11.3333 2H32.6667C34.0812 2 35.4377 2.5663 36.4379 3.57433C37.4381 4.58235 38 5.94953 38 7.37509V43.6569C37.9999 43.9 37.9343 44.1385 37.8104 44.347C37.6864 44.5555 37.5086 44.7262 37.296 44.8409C37.0834 44.9556 36.8439 45.0101 36.603 44.9985C36.3621 44.9869 36.1288 44.9096 35.928 44.7749L22 37.2095L8.072 44.7749C7.87121 44.9096 7.63795 44.9869 7.39704 44.9985C7.15614 45.0101 6.91662 44.9556 6.704 44.8409C6.49138 44.7262 6.31361 44.5555 6.18964 44.347C6.06566 44.1385 6.00012 43.9 6 43.6569V7.37509ZM11.3333 4.68754C10.6261 4.68754 9.94781 4.97069 9.44772 5.47471C8.94762 5.97872 8.66667 6.66231 8.66667 7.37509V41.1468L21.2613 34.4763C21.4802 34.3295 21.7371 34.2512 22 34.2512C22.2629 34.2512 22.5198 34.3295 22.7387 34.4763L35.3333 41.1468V7.37509C35.3333 6.66231 35.0524 5.97872 34.5523 5.47471C34.0522 4.97069 33.3739 4.68754 32.6667 4.68754H11.3333Z" fill="#474E95"/>
+               <path d="M8.5064 23.795L24.2873 32.9775L8.5064 42.1599V23.795Z" fill="#474E95"/>
+               <path d="M20.8899 35.0062L36.0608 24.8329L37.2172 43.1608L20.8899 35.0062Z" fill="#474E95"/>
+               <path d="M7.6732 4.52945H36.1176V34.8829H7.6732V4.52945Z" fill="#474E95"/>
+               </g>
+               <path d="M20.0044 25.3888L14.9911 20.4037C14.9622 20.3749 14.9393 20.3407 14.9236 20.3031C14.908 20.2655 14.8999 20.2251 14.8999 20.1843C14.8999 20.1435 14.908 20.1032 14.9236 20.0655C14.9393 20.0279 14.9622 19.9937 14.9911 19.9649L16.2568 18.6979C16.3777 18.577 16.5732 18.577 16.6941 18.6979L19.9946 21.9787C20.1155 22.0996 20.3124 22.0982 20.4333 21.9773L27.7261 14.6142C27.8471 14.4918 28.0439 14.4918 28.1663 14.6127L29.4333 15.8798C29.5543 16.0007 29.5543 16.1962 29.4347 16.3171L21.4894 24.3342L21.4908 24.3356L20.4432 25.3888C20.3222 25.5098 20.1253 25.5098 20.0044 25.3888Z" fill="#FFFCFC" stroke="white" stroke-width="0.75" stroke-miterlimit="10"/>
+               <defs>
+               <filter id="filter0_d" x="0" y="0" width="44" height="55" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+               <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+               <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"/>
+               <feOffset dy="4"/>
+               <feGaussianBlur stdDeviation="3"/>
+               <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.06 0"/>
+               <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow"/>
+               <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape"/>
+               </filter>
+               </defs>
+               </svg> 
+         </div>
+         <div class="favourite" *ngIf="!shop?.subscribe">
+            <svg width="33" height="43" viewBox="0 0 33 43" fill="none" xmlns="http://www.w3.org/2000/svg">
+               <path d="M0 5.37509C0 3.94953 0.563992 2.58235 1.5679 1.57433C2.57182 0.566302 3.93341 0 5.35316 0L26.7658 0C28.1855 0 29.5471 0.566302 30.5511 1.57433C31.555 2.58235 32.119 3.94953 32.119 5.37509V41.6569C32.1188 41.9 32.0531 42.1385 31.9286 42.347C31.8042 42.5555 31.6258 42.7262 31.4123 42.8409C31.1989 42.9556 30.9585 43.0101 30.7167 42.9985C30.4749 42.9869 30.2408 42.9096 30.0393 42.7749L16.0595 35.2095L2.0797 42.7749C1.87817 42.9096 1.64404 42.9869 1.40224 42.9985C1.16044 43.0101 0.920029 42.9556 0.706616 42.8409C0.493202 42.7262 0.314777 42.5555 0.190342 42.347C0.0659082 42.1385 0.000125051 41.9 0 41.6569V5.37509ZM5.35316 2.68754C4.64329 2.68754 3.96249 2.97069 3.46053 3.47471C2.95858 3.97872 2.67658 4.66231 2.67658 5.37509V39.1468L15.3181 32.4763C15.5377 32.3295 15.7956 32.2512 16.0595 32.2512C16.3233 32.2512 16.5813 32.3295 16.8009 32.4763L29.4424 39.1468V5.37509C29.4424 4.66231 29.1604 3.97872 28.6584 3.47471C28.1565 2.97069 27.4757 2.68754 26.7658 2.68754H5.35316Z" fill="#474E95"/>
+               </svg>  
+         </div>
+        </div>
+      
+       </div>
+       <div class="shop_block_details">
+          
+         <div class="shop_block_web_site_header">
+            Сайт
+            <div class="shop_block_web_site">
+              <a href="https://{{shop?.website}}" target="_blank">{{shop?.website}}</a> 
+            </div>
+         </div>
+         <div class="shop_block_phone_header">
+            Телефон
+            <div class="shop_block_phone">
+               {{shop?.phone}}
+            </div>
+            
+         </div>
+         <div class="shop_block_email_header">
+            Пошта
+            <div class="shop_block_email">
+               {{shop?.email}}
+            </div>
+            
+         </div>
+         <div class="shop_block_contact_os_header">
+            Власник
+            <div class="shop_block_contact_os">
+               {{shop?.contacts_people}}
+            </div>
+           
+         </div>
+        </div>
+        <div class="shop_block_line">
+        </div>
+        <div class="shop_block_details_rating">
+           <div class="shop_block_details_rating_web">
+            {{shop?.name_shop}}
+           </div>
+           <div class="shop_block_details_rating_block">
+              <div class="shop_block_details_rating_img">
+               <svg width="27" height="26" viewBox="0 0 27 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M13.5 23.7337C20.9554 23.7337 27 18.4208 27 11.8669C27 5.31296 20.9554 0 13.5 0C6.04462 0 0 5.31296 0 11.8669C0 14.8505 1.25381 17.5799 3.32438 19.6651C3.16069 21.3875 2.62069 23.276 2.02331 24.6932C1.89 25.0086 2.14819 25.3612 2.484 25.3069C6.291 24.6797 8.55394 23.7168 9.53775 23.215C10.8302 23.5613 12.1623 23.7357 13.5 23.7337Z" fill="#F12E6D"/>
+                  </svg>                  
+              </div>
+              <div class="shop_block_details_rating_block_number">
+               {{shop?.response}}
+              </div>
+              відгуків
+           
+           </div>
+           <div class="shop_block_details_rating_ball_block">
+              <div class="shop_block_details_rating_ball_block_img">
+               <svg width="26" height="25" viewBox="0 0 26 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M24.5001 11.585C24.7789 11.3773 24.9856 11.0876 25.0914 10.7565C25.1972 10.4254 25.1968 10.0695 25.0901 9.73869C24.9834 9.40788 24.7758 9.11875 24.4965 8.91184C24.2172 8.70494 23.8802 8.59063 23.5326 8.58496L16.7826 8.32996C16.7494 8.32767 16.7176 8.31583 16.691 8.29587C16.6644 8.27591 16.6441 8.24868 16.6326 8.21746L14.3001 1.91746C14.1829 1.59694 13.9701 1.32017 13.6904 1.12463C13.4107 0.929089 13.0776 0.824219 12.7364 0.824219C12.3951 0.824219 12.0621 0.929089 11.7824 1.12463C11.5027 1.32017 11.2898 1.59694 11.1726 1.91746L8.84762 8.23996C8.83613 8.27118 8.81586 8.29841 8.78924 8.31837C8.76263 8.33833 8.73081 8.35017 8.69763 8.35246L1.94762 8.60746C1.60008 8.61313 1.26302 8.72744 0.98372 8.93434C0.704416 9.14125 0.49687 9.43038 0.390182 9.76119C0.283495 10.092 0.283016 10.4479 0.388813 10.779C0.494611 11.1101 0.701379 11.3998 0.980125 11.6075L6.27513 15.77C6.30163 15.7908 6.32143 15.819 6.3321 15.851C6.34276 15.883 6.34381 15.9174 6.33512 15.95L4.51262 22.4075C4.41818 22.7363 4.42733 23.0862 4.53883 23.4097C4.65032 23.7331 4.85875 24.0144 5.13576 24.2152C5.41277 24.416 5.74491 24.5265 6.08699 24.5319C6.42907 24.5372 6.76449 24.437 7.04762 24.245L12.6426 20.495C12.6702 20.4759 12.7029 20.4657 12.7364 20.4657C12.7699 20.4657 12.8026 20.4759 12.8301 20.495L18.4251 24.245C18.7044 24.4436 19.0386 24.5503 19.3814 24.5503C19.7241 24.5503 20.0583 24.4436 20.3376 24.245C20.6147 24.0461 20.8233 23.7662 20.9348 23.4438C21.0463 23.1215 21.0551 22.7725 20.9601 22.445L19.1226 15.965C19.1129 15.9324 19.1134 15.8977 19.1242 15.8655C19.1349 15.8333 19.1553 15.8051 19.1826 15.785L24.5001 11.585Z" fill="#F12E6D"/>
+                  </svg>                  
+              </div>
+              <div class="shop_block_details_rating_ball_block_number">
+               {{shop?.ball}}.0
+              </div>
+             Загальний балів
+           </div>
+          
+        </div>
+    </div>
+   
+    </div>
+    <div class="content_header">
+        Останні відгуки
+    </div>
+    
+    <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+      <div class="carousel-inner" id="carousel_block" >
+        <div class="carousel-item" *ngFor="let reviews of arr;let i=index"  [ngClass]="{'active': i == 0 }" id="{{i/2}}">
+         <div class="response_block" *ngFor="let item of reviews">
+            <div class="response_block_content">
+             <div class="response_block_content_img">
+            <img *ngIf="!item?.logo" alt="" src="../../assets/images/Anonimus.svg" width="100px" height="100px">
+             <img *ngIf="item?.logo" alt="" [src]="item?.logo" width="100px" height="100px">
+             </div>
+             <div class="response_block_content_username">
+             {{item.name}}  {{item.surname}}
+             </div>
+             <div class="response_block_content_date_push">
+             {{item.data}}
+             </div>
+            </div>
+            <div class="content_block">
+            <div class="response_block_content_ball">
+             <div class="response_block_content_star">
+              <svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+                 <path d="M24.5001 11.8527C24.7789 11.6407 24.9856 11.3448 25.0914 11.0067C25.1972 10.6685 25.1968 10.305 25.0901 9.96718C24.9834 9.62933 24.7758 9.33405 24.4965 9.12274C24.2172 8.91143 23.8802 8.7947 23.5326 8.7889L16.7826 8.52847C16.7494 8.52613 16.7176 8.51404 16.691 8.49366C16.6644 8.47327 16.6441 8.44546 16.6326 8.41358L14.3001 1.97954C14.1829 1.6522 13.9701 1.36954 13.6904 1.16984C13.4107 0.970138 13.0776 0.863037 12.7364 0.863037C12.3951 0.863037 12.0621 0.970138 11.7824 1.16984C11.5027 1.36954 11.2898 1.6522 11.1726 1.97954L8.84762 8.43656C8.83613 8.46844 8.81586 8.49625 8.78924 8.51664C8.76263 8.53702 8.73081 8.54911 8.69763 8.55145L1.94762 8.81188C1.60008 8.81768 1.26302 8.93441 0.98372 9.14572C0.704416 9.35703 0.49687 9.65231 0.390182 9.99016C0.283495 10.328 0.283016 10.6915 0.388813 11.0296C0.494611 11.3678 0.701379 11.6636 0.980125 11.8757L6.27513 16.1268C6.30163 16.1481 6.32143 16.1768 6.3321 16.2095C6.34276 16.2422 6.34381 16.2773 6.33512 16.3106L4.51262 22.9055C4.41818 23.2413 4.42733 23.5987 4.53883 23.929C4.65032 24.2594 4.85875 24.5466 5.13576 24.7517C5.41277 24.9567 5.74491 25.0697 6.08699 25.0751C6.42907 25.0806 6.76449 24.9782 7.04762 24.7821L12.6426 20.9523C12.6702 20.9329 12.7029 20.9225 12.7364 20.9225C12.7699 20.9225 12.8026 20.9329 12.8301 20.9523L18.4251 24.7821C18.7044 24.9849 19.0386 25.0939 19.3814 25.0939C19.7241 25.0939 20.0583 24.9849 20.3376 24.7821C20.6147 24.579 20.8233 24.2931 20.9348 23.9639C21.0463 23.6347 21.0551 23.2783 20.9601 22.9438L19.1226 16.3259C19.1129 16.2927 19.1134 16.2572 19.1242 16.2243C19.1349 16.1914 19.1553 16.1627 19.1826 16.1421L24.5001 11.8527Z" fill="#F12E6D"/>
+                 </svg>
+             </div>
+             <div class="response_block_content_rating">
+               {{item.ball}}
+             </div>
+             <div class="response_block_content_good" *ngIf="item.ball>=5">
+               Рекомендує магазин
+             </div>
+             <div class="response_block_content_bad" *ngIf="item.ball<5">
+               Не рекомендує магазин
+             </div>
+             
+            </div>
+            <div class="response_block_content_text">
+              <div class="response_block_content_text_header">
+                 {{item.header}}
+              </div>
+              <div class="response_block_content_text_content">
+                {{item.text}}
+              </div>
+           </div>
+        </div>
+         </div>
+         </div>   
+            </div>
+            <div class="arrow_block">
+
+               <div class="Arrow">
+                  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls"  data-bs-slide="prev">
+                     <div class="styleArrowLeft">
+                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Предыдущий</span>
+                    </div>
+                  </button>
+                  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls"  data-bs-slide="next">
+                     <div class="styleArrowRight">
+                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Следующий</span>
+                    </div>
+                  </button>
+               </div>
+         </div>
+      </div>
+     
+</main>
+<app-footer></app-footer>

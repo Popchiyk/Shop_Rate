@@ -1,0 +1,220 @@
+*{
+   margin: 0;
+   padding: 0;
+}
+.container{
+   max-width: 1170px;
+   margin: 0 auto;
+}
+
+.background{
+   width: 100%;
+   height: 803px;
+   background:#474E95;
+}
+
+
+.brand_block{
+   position: absolute;
+   width: 206px;
+}
+
+.brand_name{
+   text-transform: uppercase;
+   position: absolute;
+   width: 206px;
+   height: 116px;
+   left: 132px;
+   top: 130px;
+   font-family: Montserrat;
+   font-style: normal;
+   font-weight: bold;
+   font-size: 68px;
+   line-height: 85%;
+   display: flex;
+   align-items: center;
+   color: #FFFFFF;
+}
+
+.brand_name p{
+   position: absolute;
+   width: 206px;
+   height: 116px;
+   left: 0px;
+   top: 80px;
+   margin-top: 7px;  
+   font-family: Montserrat;
+   font-style: normal;
+   font-weight: 100;
+   font-size: 68px;
+   line-height: 85%;
+   color: white;
+}
+
+.copyright{
+   position: absolute;
+   width: 151px;
+   height: 14px;
+   left:0;
+   top: 500px;
+   font-family: Montserrat;
+   font-style: normal;
+   font-weight: normal;
+   font-size: 16px;
+   line-height: 85%;
+   display: flex;
+   align-items: center;
+   color: #FAFAFA;
+}
+
+.error_block{
+   position: absolute;
+   width: 770px;
+   height: 632px;
+   left: 535px;
+   top: 50px;
+   background: #FAFAFA;
+   box-shadow: 0px 20px 50px rgba(0, 0, 0, 0.1);
+}
+
+.error_block_home{
+   position: absolute;
+   left: 350px;
+   top: 20px;
+}
+
+.error_block_404{
+   position: absolute;
+   width: 344px;
+   height: 55px;
+   left: 70px;
+   top: 535px;
+   font-family: Montserrat;
+   font-style: normal;
+   font-weight: 800;
+   font-size: 65px;
+   line-height: 85%;
+   display: flex;
+   align-items: center;
+   color: #474E95;
+   opacity: 0.05;
+}
+
+.error_block_main_text_header{
+   position: absolute;
+   width: 477px;
+   height: 112px;
+   left: 70px;
+   top: 56px;
+   font-family: Montserrat;
+   font-style: normal;
+   font-weight: bold;
+   font-size: 56px;
+   line-height: 100%;
+   display: flex;
+   align-items: center; 
+   color: #0A0A0A;
+}
+
+.error_block_main_text_details{
+   position: absolute;
+   width: 394px;
+   height: 69px;
+   left: 70px;
+   top: 200px;
+   font-family: Montserrat;
+   font-style: normal;
+   font-weight: normal;
+   font-size: 16px;
+   line-height: 142%;
+   display: flex;
+   align-items: center;
+   color: #0A0A0A;
+}
+
+.error_block_main_text_button{
+   position: absolute;
+   left: 70px;
+   right: 44.72%;
+   top: 60.52%;
+}
+
+.error_block_main_text_button button{
+   border: 2px solid #F12E6D;
+   background-color: transparent;
+   padding: 15px 40px;
+   box-sizing: border-box;
+   border-radius: 50px;
+   font-family: Montserrat;
+   font-style: normal;
+   cursor: pointer;
+   font-weight: 600;
+   font-size: 14px;
+   line-height: 100%;
+   display: flex;
+   text-transform: uppercase;
+   align-items: center;
+   color: #F12E6D;
+}
+
+.error_block_main_text_button button:hover{
+   background-color: #F12E6D;
+   color: white;
+   filter: drop-shadow(0px 20px 50px rgba(0, 0, 0, 0.1));
+   transition: all 0.45s ease-out;
+}
+
+@media (min-width: 320px) and (max-width: 480px){
+         .container{
+            max-width: 480px;
+            max-height: 410px;
+            overflow: hidden;
+         }
+
+         .background{
+            max-width: 480px;
+            max-height: 800px;
+            overflow: hidden;
+         }
+         
+         .error_block{
+            top: 200px;
+            max-width: 400px;
+            height: 500px;
+            left:5px;   
+            overflow: hidden;
+         }
+
+         .copyright{
+            top:150px;
+            left: 10px;
+         }
+
+         .brand_name{
+            top: 10px;
+            left: 120px;
+         }
+
+         .error_block_home{
+           display: none;
+         }
+
+         .error_block_main_text_header{
+            top:100px;
+         }
+
+         .error_block_main_text_header,.error_block_main_text_details,.error_block_main_text_button{
+            max-width: 400px;
+            font-size: 16pt;
+            left: 10px;
+         }
+
+         .error_block_main_text_button{
+            top:60%;
+         }
+
+         .error_block_404{
+            left: 10px;
+            top:40px;
+         }
+}

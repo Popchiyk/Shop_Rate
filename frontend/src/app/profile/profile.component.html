@@ -1,0 +1,47 @@
+<app-header></app-header>
+<main>
+   <div class="content">
+ 
+   <div class="content_setting">
+     <div class="content_setting_block">
+        <div class="content_block">
+        <div class="content_setting_block_list">
+           <div class="content_setting_block_header">
+              <a href="#">Профіль</a> 
+            </div>
+           <ul>
+              <li><a href="favourite">Улюблені</a></li>
+              <li><a href="accountSetting">Редагування</a></li>
+              <li><a href="accountLoginAndPassword">Пароль і логін</a></li>
+              <li><a href="login"(click)="onLogount()">Вийти</a></li>  
+           </ul>
+        </div>
+     </div>
+  </div>
+   </div>
+   <div class="content_account">
+        <div class="content_account_block_text">
+           <div class="content_account_block_text_img">
+            <img *ngIf="!isImg" alt="" src="../../assets/images/Anonimus.svg">
+            <img  *ngIf="isImg" alt="" [src]="this.user.logo">
+           </div>   
+           <div class="content_account_block_text_details">
+              <div class="content_account_block_text_username">
+                 {{username}}
+              </div>
+              <div class="content_account_block_text_name_surname">
+                 {{user?.surname}} {{user?.name}}
+              </div>
+              <div class="content_account_block_text_button">
+                 <button (click)="HrefToUpdateName()">Змінити</button>
+              </div>
+           </div>
+        </div>
+     </div>
+  </div>
+</main>
+<footer>
+  <div class="footer_text">
+     &copy;Popchiyk
+  </div> 
+ </footer>

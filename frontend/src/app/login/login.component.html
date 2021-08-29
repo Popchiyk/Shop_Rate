@@ -1,0 +1,31 @@
+<header>
+   <div class="container">
+   <div class="nav-brand">
+      <div class="nav-register">
+         Немає акаунта?
+         <a href="/registrashion">Зареєструватися</a>
+      </div>
+     
+   <div class="nav-brand-name"> SHOP<p>RATE</div>
+   </div>
+   </div>
+   </header>
+   <main>
+       <div class="alert-danger " *ngIf="FailToLogin">
+            <div class="alert-danger-text">
+               Перевірте свої данні
+            </div>   
+         </div>
+      <div class="login_block">
+         <div class="login_block_header">
+            Авторизація
+         </div>
+         <form class="login_block_form" [formGroup]='loginForm' (ngSubmit)="OnLogin()">
+            <label for="username">Логін</label>
+            <input type="text" [formControlName]="'username'" name="username">
+            <label for="password">Пароль</label>
+            <input type="password" [formControlName]="'password'" name="password">
+            <input type="submit" value="Увійти">
+         </form>
+      </div>
+   </main>

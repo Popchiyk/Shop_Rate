@@ -1,0 +1,171 @@
+<header>
+   
+   <div class="background_color">
+      <div class="main_text">
+         <div class="main_text_header">
+            Відгуки і рейтинги магазинів України
+         </div>
+         <div class="main_text_text">
+             Характеристика, відгуки, бали про магазин
+         </div>
+         <div class="main_text_button">
+            <button (click)="HrefToKatalog()">Дивитися всі</button>
+         </div> 
+   </div>    
+   <div class="container">
+      <div class="nav-brand">
+         <div class="nav-brand-name">SHOP<p>RATE
+         </div>
+         <div class="burger">
+               <input id="menu__toggle" type="checkbox" />
+               <label class="menu__btn" for="menu__toggle">
+                 <span></span>
+               </label>
+               <ul class="menu__box">
+                    <li><a class="menu__item" href="main">Головна</a></li>
+                    <li><a class="menu__item" href="katalog">Магазин</a></li>
+                    <li><a class="menu__item" href="favourite">Улюблені</a></li>
+                    <div *ngIf="!isLogin">
+                     <li><a class="menu__item" href="login">Авторизація</a></li>
+                     <li><a class="menu__item" href="registrashion">Реєстрація</a></li>
+                    </div>
+                    <div *ngIf="isLogin" style="display: flex;">
+                       <li class="menu__item">{{username}}</li>
+                       <li class="menu__item"><img *ngIf="!isImg" alt="" src="../../assets/images/Anonimus.svg">
+                        <img  *ngIf="isImg" alt="" [src]="user.logo"></li>
+                    </div>
+               </ul>
+         </div>
+         <div class="nav-link">
+            <div class="nav-link-list">
+               <ul>
+                  <li><a href="main">Головна</a></li>
+                  <li><a href="katalog">Магазин</a></li>
+                  <li><a href="favourite">Улюблені</a></li>
+               </ul>
+            </div>
+         </div>
+         <div class="nav-link-list-right">
+           <ul *ngIf="!isLogin">
+              <li><a href="login">Вхід</a></li>
+              <li><a href="registrashion">Реєстрація</a></li>
+              <li><img alt="" src="../../assets/images/Anonimus.svg">
+               </li>
+           </ul>
+           <ul *ngIf="isLogin">
+            <li style="color: black; font-weight: 400;">{{username}}</li>
+            <li class="logo" data-bs-toggle="modal" data-bs-target="#exampleModal">  <img *ngIf="!isImg" alt="" src="../../assets/images/Anonimus.svg">
+            <img  *ngIf="isImg" alt="" [src]="user.logo"></li>
+           </ul>
+          </div>
+         </div>
+        </div>
+        </div>
+  </header>
+ <main>
+   <div class="katalog">
+      <div class="katalog_block">
+         <div class="katalog_block_header">
+            Каталог
+            <div class="katalog_block_header_line"></div>
+         </div>
+         <div class="katalog_block_list">
+            <ul >
+               <li *ngFor="let kategorys of kategory"><a href="/katalog/{{kategorys.id_kategory}}">{{kategorys?.name_kategory}}</a></li>
+            </ul>
+         </div>
+      </div>
+   </div> 
+ <div class="content_link">
+   <ul>
+      <li class="selectedLink"><a href="main">Популярні</a></li>
+      <li><a href="main/rating">Рейтинг</a></li>
+   </ul>
+    </div>
+    <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel" >
+      <div class="carousel-inner" id="carousel_block" >
+        <div class="carousel-item " *ngFor="let shops of arr;let i=index"  [ngClass]="{'active': i == 0 }" id="{{i/4}}" >
+         <div class="content_shop" >
+            <ul>
+               <li *ngFor="let item of shops">
+                  <div class="shop_block">
+                     <div class="shop_block_logo">
+                        <img alt="" [src]="item.logo">             
+                     </div>
+                     <div class="shop_block_text_block">
+                        <div class="shop_block_text_block_header">
+                           {{item?.name_shop}}
+                        </div>
+                        <div class="shop_block_text_block_star">
+                           <div class="test">
+                              <svg width="28" height="27" viewBox="0 0 28 27" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin-bottom: 13px;">
+                                 <path d="M25.6003 12.585C25.8791 12.3773 26.0859 12.0876 26.1917 11.7565C26.2975 11.4254 26.297 11.0695 26.1903 10.7387C26.0836 10.4079 25.8761 10.1187 25.5967 9.91184C25.3174 9.70494 24.9804 9.59063 24.6328 9.58496L17.8828 9.32996C17.8497 9.32767 17.8178 9.31583 17.7912 9.29587C17.7646 9.27591 17.7443 9.24868 17.7328 9.21746L15.4003 2.91746C15.2832 2.59694 15.0703 2.32017 14.7906 2.12463C14.5109 1.92909 14.1779 1.82422 13.8366 1.82422C13.4953 1.82422 13.1623 1.92909 12.8826 2.12463C12.6029 2.32017 12.39 2.59694 12.2728 2.91746L9.94784 9.23996C9.93635 9.27118 9.91608 9.29841 9.88946 9.31837C9.86285 9.33833 9.83103 9.35017 9.79784 9.35246L3.04784 9.60746C2.7003 9.61313 2.36324 9.72744 2.08394 9.93434C1.80464 10.1412 1.59709 10.4304 1.4904 10.7612C1.38371 11.092 1.38324 11.4479 1.48903 11.779C1.59483 12.1101 1.8016 12.3998 2.08034 12.6075L7.37534 16.77C7.40184 16.7908 7.42165 16.819 7.43231 16.851C7.44298 16.883 7.44403 16.9174 7.43534 16.95L5.61284 23.4075C5.5184 23.7363 5.52755 24.0862 5.63905 24.4097C5.75054 24.7331 5.95897 25.0144 6.23598 25.2152C6.51299 25.416 6.84513 25.5265 7.18721 25.5319C7.52929 25.5372 7.86471 25.437 8.14784 25.245L13.7428 21.495C13.7704 21.4759 13.8031 21.4657 13.8366 21.4657C13.8701 21.4657 13.9028 21.4759 13.9303 21.495L19.5253 25.245C19.8046 25.4436 20.1389 25.5503 20.4816 25.5503C20.8243 25.5503 21.1585 25.4436 21.4378 25.245C21.7149 25.0461 21.9236 24.7662 22.035 24.4438C22.1465 24.1215 22.1553 23.7725 22.0603 23.445L20.2228 16.965C20.2131 16.9324 20.2136 16.8977 20.2244 16.8655C20.2351 16.8333 20.2555 16.8051 20.2828 16.785L25.6003 12.585Z" fill="#F12E6D"/>
+                                 </svg>
+                                 <div class="shop_block_text_block_ball">
+                                    <ul>
+                                       <li>{{item.ball}}.0</li>                                   
+                                       <li>{{item.response}} відгуків</li>
+                                    </ul>
+                                 </div> 
+                                 <div class="kategory">
+                                    <ul>
+                                       <li> {{item.id_Kategory.name_kategory}}</li>
+                                    </ul>
+                                 </div>
+                           </div>
+                           
+                              
+                              <div class="shop_block_text_block_button">
+                                 <ul>
+                                    <li><a href="infoshop/{{item.id}}">Перейти</a></li>
+                                    <li class="favourite" (click)="AddFavourite(item.id)"><svg width="33" height="43" viewBox="0 0 33 43" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                       <path d="M0.773193 5.37509C0.773193 3.94953 1.33719 2.58235 2.3411 1.57433C3.34501 0.566302 4.70661 0 6.12635 0L27.539 0C28.9587 0 30.3203 0.566302 31.3242 1.57433C32.3282 2.58235 32.8922 3.94953 32.8922 5.37509V41.6569C32.892 41.9 32.8262 42.1385 32.7018 42.347C32.5774 42.5555 32.3989 42.7262 32.1855 42.8409C31.9721 42.9556 31.7317 43.0101 31.4899 42.9985C31.2481 42.9869 31.014 42.9096 30.8124 42.7749L16.8327 35.2095L2.8529 42.7749C2.65136 42.9096 2.41723 42.9869 2.17543 42.9985C1.93363 43.0101 1.69322 42.9556 1.47981 42.8409C1.2664 42.7262 1.08797 42.5555 0.963536 42.347C0.839102 42.1385 0.773318 41.9 0.773193 41.6569V5.37509ZM6.12635 2.68754C5.41648 2.68754 4.73568 2.97069 4.23373 3.47471C3.73177 3.97872 3.44977 4.66231 3.44977 5.37509V39.1468L16.0913 32.4763C16.3109 32.3295 16.5688 32.2512 16.8327 32.2512C17.0965 32.2512 17.3544 32.3295 17.5741 32.4763L30.2156 39.1468V5.37509C30.2156 4.66231 29.9336 3.97872 29.4316 3.47471C28.9297 2.97069 28.2489 2.68754 27.539 2.68754H6.12635Z" fill="#474E95"/>
+                                       </svg></li>
+                                 </ul>
+                              </div>
+                             
+                        </div>
+                      
+                     </div>
+                     </div>
+               </li>
+               </ul>
+        </div>
+        </div>
+      </div>
+      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+         <div class="modal-dialog">
+           <div class="modal-content" style="width: 372px;height: 270px;">
+              <div class="modal-header">
+                  <a href="profile">Профіль</a>
+             </div>
+             <div class="modal-body">
+              <ul>
+                 <li><a href="favourite">Улюблені</a></li>
+                 <li><a href="accountSetting">Редагувати</a></li>
+               <li><a href="#" (click)="LogOut()">Вихід</a></li>
+              </ul>
+             </div>
+           </div>
+           
+         </div>
+       </div>
+      <div class="arrow_block">
+         <div class="Arrow">
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls"  data-bs-slide="prev">
+               <div class="styleArrowRight">
+               <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Предыдущий</span>
+              </div>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls"  data-bs-slide="next">
+               <div class="styleArrowLeft">
+               <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Следующий</span>
+              </div>
+            </button>
+         </div>
+      </div>
+    </div>
+</main>
+<app-footer></app-footer>

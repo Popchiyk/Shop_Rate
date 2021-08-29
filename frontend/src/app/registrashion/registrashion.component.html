@@ -1,0 +1,61 @@
+<header>
+   <div class="container">
+<div class="nav-brand">
+   <div class="nav-register">
+      Існує аккаунт?
+      <a href="/login">Увійти</a>
+   </div>
+<div class="nav-brand-name"> SHOP<p>RATE</div>
+</div>
+</div>
+</header>
+<main>
+    <div class="alert-done" *ngIf="isSuccesfullRegistrashio">
+         <div class="alert-done-text">
+            Ви успішно зарєструвалися
+         </div>
+         
+      </div>
+      <div class="alert-danger" *ngIf="isFailRegistrashion">
+         <div class="alert-danger-text">
+            Перевірьте данні
+         </div>
+         
+      </div>
+<div class="registercontent">
+   <div class="registercontent_header">
+      Реєстрація
+   </div>
+   <div class="registercontent_block">
+      <form [formGroup]="registerForm" (ngSubmit)="OnSubmit()">
+      <ul>
+         <li><label for="name">Ім'я</label><input type="text" class="form-control" [formControlName]="'name'" class="name">
+         </li>
+         <li><label for="username">Логін</label><input type="text" [formControlName]="'username'" class="username">
+         </li>
+      </ul>
+ 
+   <div class="registercontent_block">
+      <ul>
+         <li><label for="name">Прізвище</label><input type="text" [formControlName]="'surname'" class="name">
+         </li>
+         <li><label for="username">По батькові</label><input type="text"[formControlName]="'lastname'" class="username">
+         </li>
+      </ul>
+   <div class="registercontent_block_different_date">
+      <label for="name">Телефон</label>
+      <input type="text" [formControlName]="'phone'"  class="name">   
+      <label for="name">Почта</label>
+      <input type="email" [formControlName]="'email'" class="email">  
+      <label for="name">Пароль</label>
+      <input type="password" [formControlName]="'password'" class="password">  
+      <label for="name">Підтвердіть пароль</label>
+      <input type="password" [formControlName]="'configpassword'" class="configpassword">
+      <input type="checkbox"><div class="text_for_checkbox">Згоден з політикою конфіденційності</div>
+      <input type="submit" class="asd" value="Створити аккаунт">
+   </div>
+</div>
+</form>
+   </div>
+</div>
+</main>

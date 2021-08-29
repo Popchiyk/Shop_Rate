@@ -1,0 +1,132 @@
+<app-header></app-header>
+<div class="content_shop_list">
+   <div class="content_link_list"> 
+      <ul>
+         <li><a href="infoshop/{{shop?.id}}">Інформація</a></li>
+         <li class="selectedLink"><a href="allresponce/{{shop?.id}}">Всі відгуки</a></li>
+         <li><a href="writeresponce/{{shop?.id}}">Написати відгук</a></li>
+         <li><a href="favourite">Улюблені</a></li>
+      </ul>
+   </div>
+ </div>
+<main>
+ 
+    <div class="shop_block">
+      <div class="shop_block_content">
+         <div class="shop_block_content_img">
+            <img alt="" [src]="shop?.logo">
+         </div>
+         <div class="shop_block_details_rating_ball_block">
+            <div class="shop_block_details_rating_ball_block_img">
+             <svg width="26" height="25" viewBox="0 0 26 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M24.5001 11.585C24.7789 11.3773 24.9856 11.0876 25.0914 10.7565C25.1972 10.4254 25.1968 10.0695 25.0901 9.73869C24.9834 9.40788 24.7758 9.11875 24.4965 8.91184C24.2172 8.70494 23.8802 8.59063 23.5326 8.58496L16.7826 8.32996C16.7494 8.32767 16.7176 8.31583 16.691 8.29587C16.6644 8.27591 16.6441 8.24868 16.6326 8.21746L14.3001 1.91746C14.1829 1.59694 13.9701 1.32017 13.6904 1.12463C13.4107 0.929089 13.0776 0.824219 12.7364 0.824219C12.3951 0.824219 12.0621 0.929089 11.7824 1.12463C11.5027 1.32017 11.2898 1.59694 11.1726 1.91746L8.84762 8.23996C8.83613 8.27118 8.81586 8.29841 8.78924 8.31837C8.76263 8.33833 8.73081 8.35017 8.69763 8.35246L1.94762 8.60746C1.60008 8.61313 1.26302 8.72744 0.98372 8.93434C0.704416 9.14125 0.49687 9.43038 0.390182 9.76119C0.283495 10.092 0.283016 10.4479 0.388813 10.779C0.494611 11.1101 0.701379 11.3998 0.980125 11.6075L6.27513 15.77C6.30163 15.7908 6.32143 15.819 6.3321 15.851C6.34276 15.883 6.34381 15.9174 6.33512 15.95L4.51262 22.4075C4.41818 22.7363 4.42733 23.0862 4.53883 23.4097C4.65032 23.7331 4.85875 24.0144 5.13576 24.2152C5.41277 24.416 5.74491 24.5265 6.08699 24.5319C6.42907 24.5372 6.76449 24.437 7.04762 24.245L12.6426 20.495C12.6702 20.4759 12.7029 20.4657 12.7364 20.4657C12.7699 20.4657 12.8026 20.4759 12.8301 20.495L18.4251 24.245C18.7044 24.4436 19.0386 24.5503 19.3814 24.5503C19.7241 24.5503 20.0583 24.4436 20.3376 24.245C20.6147 24.0461 20.8233 23.7662 20.9348 23.4438C21.0463 23.1215 21.0551 22.7725 20.9601 22.445L19.1226 15.965C19.1129 15.9324 19.1134 15.8977 19.1242 15.8655C19.1349 15.8333 19.1553 15.8051 19.1826 15.785L24.5001 11.585Z" fill="#F12E6D"/>
+                </svg>                  
+            </div>
+            <div class="shop_block_details_rating_ball_block_number">
+              {{shop?.ball}}.0
+            </div>
+           Загальний балл
+         </div>
+         <div class="shop_block_details_rating_block">
+            <div class="shop_block_details_rating_img">
+             <svg width="27" height="26" viewBox="0 0 27 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M13.5 23.7337C20.9554 23.7337 27 18.4208 27 11.8669C27 5.31296 20.9554 0 13.5 0C6.04462 0 0 5.31296 0 11.8669C0 14.8505 1.25381 17.5799 3.32438 19.6651C3.16069 21.3875 2.62069 23.276 2.02331 24.6932C1.89 25.0086 2.14819 25.3612 2.484 25.3069C6.291 24.6797 8.55394 23.7168 9.53775 23.215C10.8302 23.5613 12.1623 23.7357 13.5 23.7337Z" fill="#F12E6D"/>
+                </svg>                  
+            </div>
+            <div class="shop_block_details_rating_block_number">
+               {{shop?.response}}
+            </div>
+            відгуків
+         
+         </div>
+         <div class="shop_block_click">
+            <button (click)="HrefToResponce()">Додати відгук</button>
+            </div>
+        </div>
+      </div>
+      <div class="content">
+            <div class="content_header">
+               Всі відгуки
+           </div>
+         <div class="content2">
+            <div class="content_button">
+               <a href="/allresponce/rating">По оцінкам</a>
+            </div>
+         </div>
+      </div>
+      <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+         <div class="carousel-inner" id="carousel_block" >
+           <div class="carousel-item"  *ngFor="let reviews of arr;let i=index"  [ngClass]="{'active': i == 0 }" id="{{i/2}}">
+            <div class="response_block" *ngFor="let item of reviews">
+               <div class="response_block_content">
+                <div class="response_block_content_img">
+                  <img *ngIf="!item.logo" alt="" src="../../assets/images/Anonimus.svg" width="100px" height="100px" >
+                <img  *ngIf="item.logo" alt="" [src]="item.logo" width="100px" height="100px">
+                </div>
+                <div class="response_block_content_username">
+                {{item.name}} {{item.surname}}
+                </div>
+                <div class="response_block_content_date_push">
+                {{item.data}}
+                </div>
+               </div>
+               <div class="content_block">       
+               <div class="response_block_content_ball">
+                
+                <div class="response_block_content_star">
+                 <svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M24.5001 11.8527C24.7789 11.6407 24.9856 11.3448 25.0914 11.0067C25.1972 10.6685 25.1968 10.305 25.0901 9.96718C24.9834 9.62933 24.7758 9.33405 24.4965 9.12274C24.2172 8.91143 23.8802 8.7947 23.5326 8.7889L16.7826 8.52847C16.7494 8.52613 16.7176 8.51404 16.691 8.49366C16.6644 8.47327 16.6441 8.44546 16.6326 8.41358L14.3001 1.97954C14.1829 1.6522 13.9701 1.36954 13.6904 1.16984C13.4107 0.970138 13.0776 0.863037 12.7364 0.863037C12.3951 0.863037 12.0621 0.970138 11.7824 1.16984C11.5027 1.36954 11.2898 1.6522 11.1726 1.97954L8.84762 8.43656C8.83613 8.46844 8.81586 8.49625 8.78924 8.51664C8.76263 8.53702 8.73081 8.54911 8.69763 8.55145L1.94762 8.81188C1.60008 8.81768 1.26302 8.93441 0.98372 9.14572C0.704416 9.35703 0.49687 9.65231 0.390182 9.99016C0.283495 10.328 0.283016 10.6915 0.388813 11.0296C0.494611 11.3678 0.701379 11.6636 0.980125 11.8757L6.27513 16.1268C6.30163 16.1481 6.32143 16.1768 6.3321 16.2095C6.34276 16.2422 6.34381 16.2773 6.33512 16.3106L4.51262 22.9055C4.41818 23.2413 4.42733 23.5987 4.53883 23.929C4.65032 24.2594 4.85875 24.5466 5.13576 24.7517C5.41277 24.9567 5.74491 25.0697 6.08699 25.0751C6.42907 25.0806 6.76449 24.9782 7.04762 24.7821L12.6426 20.9523C12.6702 20.9329 12.7029 20.9225 12.7364 20.9225C12.7699 20.9225 12.8026 20.9329 12.8301 20.9523L18.4251 24.7821C18.7044 24.9849 19.0386 25.0939 19.3814 25.0939C19.7241 25.0939 20.0583 24.9849 20.3376 24.7821C20.6147 24.579 20.8233 24.2931 20.9348 23.9639C21.0463 23.6347 21.0551 23.2783 20.9601 22.9438L19.1226 16.3259C19.1129 16.2927 19.1134 16.2572 19.1242 16.2243C19.1349 16.1914 19.1553 16.1627 19.1826 16.1421L24.5001 11.8527Z" fill="#F12E6D"/>
+                    </svg>
+                </div>
+                <div class="response_block_content_rating">
+                   {{item.ball}}
+                </div>
+                <div class="response_block_content_good" *ngIf="item.ball>=5">
+                  Рекомендує магазин
+                 </div>
+                 <div class="response_block_content_bad" *ngIf="item.ball<5">
+                  Не рекомендує магазин
+                 </div>
+                
+               </div>
+               <div class="response_block_content_text">
+                 <div class="response_block_content_text_header">
+                    {{item.header}}
+                 </div>
+                 <div class="response_block_content_text_content">
+                   {{item.text}}
+                 </div>
+              </div>
+              <!-- <div class="response_block_content_interesting">
+                Це було Корисно?
+              </div> -->
+           </div>
+            </div>
+            </div>   
+              
+   
+               </div>
+   
+               <div class="arrow_block">
+   
+                  <div class="Arrow">
+                     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls"  data-bs-slide="prev">
+                        <div class="styleArrowLeft">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                       <span class="visually-hidden">Предыдущий</span>
+                       </div>
+                     </button>
+                     <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls"  data-bs-slide="next">
+                        <div class="styleArrowRight">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                       <span class="visually-hidden">Следующий</span>
+                       </div>
+                     </button>
+                  </div>
+            </div>
+         </div>
+     
+     
+      
+</main>
+<app-footer></app-footer>

@@ -1,0 +1,20 @@
+li{
+   list-style: none;
+}
+
+a{
+   text-decoration: none;
+   color: black;
+   cursor: pointer;
+}
+
+#form li{
+   margin-right: 10px;
+}
+#form li:first-child{
+   margin-right: 30px;
+}
+
+.username{
+   text-transform: uppercase;
+}

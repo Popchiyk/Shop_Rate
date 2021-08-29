@@ -1,0 +1,165 @@
+<app-header></app-header>
+<div class="content_alert" *ngIf="isSuccesfull">
+   Було успішно додано
+</div>
+<div class="content_shop_list">
+   <div class="content_link_list"> 
+      <ul>
+         <li><a href="infoshop/{{shop?.id}}">Інформація</a></li>
+         <li><a href="allresponce/{{shop?.id}}">Всі відгуки</a></li>
+         <li class="selectedLink"><a href="writeresponce/{{shop?.id}}">Написати відгук</a></li>
+         <li><a href="favourite">Улюблені</a></li>
+      </ul>
+   </div>
+ </div>
+<main *ngIf="isLogin">
+ 
+    <div class="shop_block">
+      <div class="shop_block_content">
+         <div class="shop_block_content_img">
+            <img alt="" [src]="shop?.logo">
+         </div>
+         <div class="shop_block_details_rating_ball_block">
+            <div class="shop_block_details_rating_ball_block_img">
+             <svg width="26" height="25" viewBox="0 0 26 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M24.5001 11.585C24.7789 11.3773 24.9856 11.0876 25.0914 10.7565C25.1972 10.4254 25.1968 10.0695 25.0901 9.73869C24.9834 9.40788 24.7758 9.11875 24.4965 8.91184C24.2172 8.70494 23.8802 8.59063 23.5326 8.58496L16.7826 8.32996C16.7494 8.32767 16.7176 8.31583 16.691 8.29587C16.6644 8.27591 16.6441 8.24868 16.6326 8.21746L14.3001 1.91746C14.1829 1.59694 13.9701 1.32017 13.6904 1.12463C13.4107 0.929089 13.0776 0.824219 12.7364 0.824219C12.3951 0.824219 12.0621 0.929089 11.7824 1.12463C11.5027 1.32017 11.2898 1.59694 11.1726 1.91746L8.84762 8.23996C8.83613 8.27118 8.81586 8.29841 8.78924 8.31837C8.76263 8.33833 8.73081 8.35017 8.69763 8.35246L1.94762 8.60746C1.60008 8.61313 1.26302 8.72744 0.98372 8.93434C0.704416 9.14125 0.49687 9.43038 0.390182 9.76119C0.283495 10.092 0.283016 10.4479 0.388813 10.779C0.494611 11.1101 0.701379 11.3998 0.980125 11.6075L6.27513 15.77C6.30163 15.7908 6.32143 15.819 6.3321 15.851C6.34276 15.883 6.34381 15.9174 6.33512 15.95L4.51262 22.4075C4.41818 22.7363 4.42733 23.0862 4.53883 23.4097C4.65032 23.7331 4.85875 24.0144 5.13576 24.2152C5.41277 24.416 5.74491 24.5265 6.08699 24.5319C6.42907 24.5372 6.76449 24.437 7.04762 24.245L12.6426 20.495C12.6702 20.4759 12.7029 20.4657 12.7364 20.4657C12.7699 20.4657 12.8026 20.4759 12.8301 20.495L18.4251 24.245C18.7044 24.4436 19.0386 24.5503 19.3814 24.5503C19.7241 24.5503 20.0583 24.4436 20.3376 24.245C20.6147 24.0461 20.8233 23.7662 20.9348 23.4438C21.0463 23.1215 21.0551 22.7725 20.9601 22.445L19.1226 15.965C19.1129 15.9324 19.1134 15.8977 19.1242 15.8655C19.1349 15.8333 19.1553 15.8051 19.1826 15.785L24.5001 11.585Z" fill="#F12E6D"/>
+                </svg>                  
+            </div>
+            <div class="shop_block_details_rating_ball_block_number">
+              {{shop?.ball}}.0
+            </div>
+           Загальний балл
+         </div>
+         <div class="shop_block_details_rating_block">
+            <div class="shop_block_details_rating_img">
+             <svg width="27" height="26" viewBox="0 0 27 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M13.5 23.7337C20.9554 23.7337 27 18.4208 27 11.8669C27 5.31296 20.9554 0 13.5 0C6.04462 0 0 5.31296 0 11.8669C0 14.8505 1.25381 17.5799 3.32438 19.6651C3.16069 21.3875 2.62069 23.276 2.02331 24.6932C1.89 25.0086 2.14819 25.3612 2.484 25.3069C6.291 24.6797 8.55394 23.7168 9.53775 23.215C10.8302 23.5613 12.1623 23.7357 13.5 23.7337Z" fill="#F12E6D"/>
+                </svg>                  
+            </div>
+            <div class="shop_block_details_rating_block_number">
+             {{shop?.response}}
+            </div>
+            відгуків
+         
+         </div>
+        </div>
+      </div>
+
+      <div class="content_responce">
+         <div class="stats_user">
+               <div class="img_user">
+                  <img *ngIf="!user?.logo" alt="" src="../../assets/images/Anonimus.svg">
+                  <img *ngIf="user?.logo"alt="" [src]="user?.logo">
+               </div>
+               <div class="login_user">
+                  {{username}}
+                  <div class="fullname_user">
+                    {{user?.name}} {{user?.surname}}
+                  </div>
+               </div>
+               
+         </div>
+         <div class="responce_content_form">
+            <form  (ngSubmit)="SendReview()" [formGroup]='sendReview'>
+            <div class="form_header">
+               Поставте кількість балів
+            </div>
+            <form (change)="Star($event)">
+            <div class="form_stars">
+               <div class="rating-area">
+                
+                  <input type="radio" id="star-10" name="rating" value="10">
+                  <label for="star-10" title="Оценка «10»"></label>
+                  <input type="radio" id="star-9" name="rating" value="9">
+                  <label for="star-9" title="Оценка «9»"></label>	
+                  <input type="radio" id="star-8" name="rating" value="8">
+                  <label for="star-8" title="Оценка «8»"></label>
+                  <input type="radio" id="star-7" name="rating" value="7">
+                  <label for="star-7" title="Оценка «7»"></label>
+                  <input type="radio" id="star-6" name="rating" value="6">
+                  <label for="star-6" title="Оценка «6»"></label>	
+                  <input type="radio" id="star-5" name="rating" value="5">
+                  <label for="star-5" title="Оценка «5»"></label>	
+                  <input type="radio" id="star-4" name="rating" value="4">
+                  <label for="star-4" title="Оценка «4»"></label>
+                  <input type="radio" id="star-3" name="rating" value="3">
+                  <label for="star-3" title="Оценка «3»"></label> 
+                  <input type="radio" id="star-2" name="rating" value="2">
+                  <label for="star-2" title="Оценка «2»"></label> 
+                  <input type="radio" id="star-1" name="rating" value="1">
+                  <label for="star-1" title="Оценка «1»"></label>
+               
+               </div>
+            </div>
+         </form>
+            <div class="form_input" >
+               <label for="input_header">Заголовок</label>
+               <input type="text" name="input_header"[formControlName]="'header'">
+            </div>
+            <div class="form_textarea">
+               <label for="responce">Відгук</label>
+              <textarea maxlength="414" [formControlName]="'text'">
+
+              </textarea>
+            </div>
+            <div class="form_checkbox">
+               <input type="checkbox">
+               <div class="form_checkbox_text">
+                  Заповнюючи цю форму, я приймаю угоду
+               </div>
+            </div>
+            <div class="form_submit">
+               <input type="submit" value="Відправити">
+               <button (click)="ClearAll()">Очистити</button>
+            </div>
+         </form>
+         </div>
+      </div>
+</main>
+<main *ngIf="!isLogin">
+   <div class="shop_block">
+      <div class="shop_block_content">
+         <div class="shop_block_content_img">
+            <img alt="" [src]="shop?.logo">
+         </div>
+         <div class="shop_block_details_rating_ball_block">
+            <div class="shop_block_details_rating_ball_block_img">
+             <svg width="26" height="25" viewBox="0 0 26 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M24.5001 11.585C24.7789 11.3773 24.9856 11.0876 25.0914 10.7565C25.1972 10.4254 25.1968 10.0695 25.0901 9.73869C24.9834 9.40788 24.7758 9.11875 24.4965 8.91184C24.2172 8.70494 23.8802 8.59063 23.5326 8.58496L16.7826 8.32996C16.7494 8.32767 16.7176 8.31583 16.691 8.29587C16.6644 8.27591 16.6441 8.24868 16.6326 8.21746L14.3001 1.91746C14.1829 1.59694 13.9701 1.32017 13.6904 1.12463C13.4107 0.929089 13.0776 0.824219 12.7364 0.824219C12.3951 0.824219 12.0621 0.929089 11.7824 1.12463C11.5027 1.32017 11.2898 1.59694 11.1726 1.91746L8.84762 8.23996C8.83613 8.27118 8.81586 8.29841 8.78924 8.31837C8.76263 8.33833 8.73081 8.35017 8.69763 8.35246L1.94762 8.60746C1.60008 8.61313 1.26302 8.72744 0.98372 8.93434C0.704416 9.14125 0.49687 9.43038 0.390182 9.76119C0.283495 10.092 0.283016 10.4479 0.388813 10.779C0.494611 11.1101 0.701379 11.3998 0.980125 11.6075L6.27513 15.77C6.30163 15.7908 6.32143 15.819 6.3321 15.851C6.34276 15.883 6.34381 15.9174 6.33512 15.95L4.51262 22.4075C4.41818 22.7363 4.42733 23.0862 4.53883 23.4097C4.65032 23.7331 4.85875 24.0144 5.13576 24.2152C5.41277 24.416 5.74491 24.5265 6.08699 24.5319C6.42907 24.5372 6.76449 24.437 7.04762 24.245L12.6426 20.495C12.6702 20.4759 12.7029 20.4657 12.7364 20.4657C12.7699 20.4657 12.8026 20.4759 12.8301 20.495L18.4251 24.245C18.7044 24.4436 19.0386 24.5503 19.3814 24.5503C19.7241 24.5503 20.0583 24.4436 20.3376 24.245C20.6147 24.0461 20.8233 23.7662 20.9348 23.4438C21.0463 23.1215 21.0551 22.7725 20.9601 22.445L19.1226 15.965C19.1129 15.9324 19.1134 15.8977 19.1242 15.8655C19.1349 15.8333 19.1553 15.8051 19.1826 15.785L24.5001 11.585Z" fill="#F12E6D"/>
+                </svg>                  
+            </div>
+            <div class="shop_block_details_rating_ball_block_number">
+               {{shop?.ball}}.0
+            </div>
+           Загальний відгук
+         </div>
+         <div class="shop_block_details_rating_block">
+            <div class="shop_block_details_rating_img">
+             <svg width="27" height="26" viewBox="0 0 27 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M13.5 23.7337C20.9554 23.7337 27 18.4208 27 11.8669C27 5.31296 20.9554 0 13.5 0C6.04462 0 0 5.31296 0 11.8669C0 14.8505 1.25381 17.5799 3.32438 19.6651C3.16069 21.3875 2.62069 23.276 2.02331 24.6932C1.89 25.0086 2.14819 25.3612 2.484 25.3069C6.291 24.6797 8.55394 23.7168 9.53775 23.215C10.8302 23.5613 12.1623 23.7357 13.5 23.7337Z" fill="#F12E6D"/>
+                </svg>                  
+            </div>
+            <div class="shop_block_details_rating_block_number">
+               {{shop?.response}}
+            </div>
+            відгуків
+         
+         </div>
+        </div>
+      </div>
+      <div class="content_responce">
+         <div class="responce_declined">
+            <div class="responce_img">
+               <img src="../../assets/images/Blokc.svg">
+            </div>
+            <div class="responce_text">
+               Ви не можете залишати відгуки на нашому сайті. Що-б відправити відгук вам необхідно увійти або зареєструватися.
+            </div>
+            <div class="responce_button">
+               <button (click)="ToLogin()">Ввійти</button>
+               <button (click)="ToRegistrashion()">Регестрація</button>
+            </div>
+         </div>
+      </div>
+</main>
+<app-footer></app-footer>

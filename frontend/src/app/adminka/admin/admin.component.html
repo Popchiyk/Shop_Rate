@@ -1,0 +1,120 @@
+<app-headingforadm></app-headingforadm>
+<div class="container">
+  <div class="alert alert-success" role="alert" *ngIf="isSuccesful" style="max-width: 500px;">
+    Дані було успішно видалено
+  </div>
+    <div class="alert alert-danger" role="alert" *ngIf="isFail" style="max-width: 500px;">
+      Виникла помилка при видалені
+    </div>
+</div>
+<main *ngIf="isTableInfoShop">
+   <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">id</th>
+          <th scope="col">сontanct_people</th>
+          <th scope="col">email</th>
+          <th scope="col">logo</th>
+          <th scope="col">name_shop</th>
+          <th scope="col">phone</th>
+          <th scope="col">website</th>
+          <th scope="col">kategory</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let shops of shop">
+          <th scope="row">{{shops?.id}}</th>
+          <td>{{shops?.contacts_people}}</td>
+          <td>{{shops?.email}}</td>
+          <td><img alt="" [src]="shops?.logo" width="50px" height="40px"></td>
+          <td>{{shops?.name_shop}}</td>
+          <td>{{shops?.phone}}</td>
+          <td>{{shops?.website}}</td>
+          <td>{{shops?.id_Kategory['name_kategory']}}</td>
+          <td><a  href="/update/shops/{{shops?.id}}"type="button" class="btn btn-outline-primary">Змінити</a></td>
+          <td><button type="button" class="btn btn-outline-danger" (click)="DeleteShop(shops.id)">Видалити</button></td>
+        </tr>
+      </tbody>
+    </table>
+</main>
+<main *ngIf="isTableKategory">
+   <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">id</th>
+          <th scope="col">name_kategory</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let kategorys of kategory">
+          <th scope="row">{{kategorys?.id_kategory}}</th>
+          <td>{{kategorys?.name_kategory}}</td>
+          <td><a href="/update/kategory/{{kategorys?.id_kategory}}" type="button" class="btn btn-outline-primary">Змінити</a></td>
+          <td><button type="button" class="btn btn-outline-danger" (click)="DeleteKategory(kategorys.id_kategory)">Видалити</button></td>
+        </tr>
+      </tbody>
+    </table>
+</main>
+<main *ngIf="isTableReview">
+   <table class="table">
+      <thead>
+        <tr>
+         <th scope="col">id</th>
+          <th scope="col">ball</th>
+          <th scope="col">data</th>
+          <th scope="col">header</th>
+          <th scope="col">text</th>
+          <th scope="col">username</th>
+          <th scope="col">id_shop</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let reviews of review">
+          <th scope="row">{{reviews.id}}</th>
+          <td>{{reviews.ball}}</td>
+          <td>{{reviews.data}}</td>
+          <td>{{reviews.header}}</td>
+          <td style="max-width: 300px; white-space: nowrap; /* Запрещаем перенос строк */
+          overflow: hidden; /* Обрезаем все, что не помещается в область */text-overflow: ellipsis;">{{reviews.text}}</td>
+             <td>{{reviews.username}}</td>
+             <td>{{reviews.id_shop}}</td>
+             <td><button type="button" class="btn btn-outline-danger" (click)="DeleteReview(reviews.id)">Видалити</button></td>
+        </tr>
+      </tbody>
+    </table>
+</main>
+<main *ngIf="isTableUsers">
+   <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">id</th>
+          <th scope="col">email</th>
+          <th scope="col">lastname</th>
+          <th scope="col">logo</th>
+          <th scope="col">name</th>
+          <th scope="col">password</th>
+          <th scope="col">phone</th>
+          <th scope="col">surname</th>
+          <th scope="col">username</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let userss of users">
+          <th scope="row">{{userss.id}}</th>
+          <td>{{userss.email}}</td>
+          <td>{{userss.lastname}}</td>
+          <td><img alt="" [src]="userss?.logo" width="40px" height="30px"></td>
+          <td>{{userss.name}}</td>
+          <td>{{userss.password}}</td>
+          <td>{{userss.phone}}</td>
+          <td>{{userss.surname}}</td>
+          <td>{{userss.login}}
+          </td>
+          <td><button type="button" class="btn btn-outline-danger" (click)="DeleteUser(userss.id)">Видалити</button></td>
+        </tr>
+      </tbody>
+    </table>
+</main>
+<app-footerforadmin></app-footerforadmin>
+
+

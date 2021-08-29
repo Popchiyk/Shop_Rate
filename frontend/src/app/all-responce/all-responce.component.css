@@ -1,0 +1,474 @@
+main{
+   max-width: 1170px;
+   margin-left: 95px;
+}
+ul{
+   padding: 0;
+}
+
+.content_link_list{
+   max-width: 1170px;
+   height: 100%;
+   margin-left: 132px;
+   margin-top: 72px;
+}
+
+.content_link_list ul{
+  display: inline-flex;
+  list-style: none;
+}
+
+.content_link_list li{
+  margin-right: 59px;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.content_link_list a{
+  text-decoration: none;
+  color: #7A7A7A;
+}
+
+.content_link_list li::after{
+  padding-left: 60px;
+  content: "|";
+   color: #D5D5D5;
+   font-weight: 100;
+}
+
+.content_link_list li:last-child::after{
+  content: " ";
+}
+
+.selectedLink a{
+   font-family: Montserrat;
+   font-style: normal;
+   font-weight: bold;
+   font-size: 24px;
+   line-height: 100%;
+   color: #474E95;
+}
+
+.shop_block{
+   width: 1250px;
+   height: 139px;
+   margin-top: 57px;
+   background: #FAFAFA;
+   box-shadow: 0px 15px 20px rgba(0, 0, 0, 0.05);
+}
+
+.shop_block_content{
+   display: flex;
+}
+
+
+.shop_block_content_img{
+   margin-top: 40px;
+   
+   margin-left: 40px;
+}
+
+.shop_block_content_img img{
+   width: 312px;
+   height: 74px;
+}
+
+.shop_block_details_rating_block{
+   margin-top: 36px;
+   margin-left: 80px;
+   display: flex;
+   font-family: Montserrat;
+   font-style: normal;
+   font-weight: normal;
+   font-size: 14px;
+   line-height: 100%;
+   display: flex;
+   align-items: center;
+   color: #414040;
+}
+
+.shop_block_details_rating_block_number,.shop_block_details_rating_ball_block_number{
+   font-family: Montserrat;
+   font-style: normal;
+   font-weight: 600;
+   font-size: 24px;
+   line-height: 100%;
+   display: flex;
+   align-items: center;
+   color: #414040;
+   margin-right: 10px;
+}
+
+.shop_block_details_rating_img,.shop_block_details_rating_ball_block_img{
+   margin-right: 10px;
+}
+
+
+
+.shop_block_details_rating_ball_block{
+   margin-top: 36px;
+   margin-left: 101px;
+   font-family: Montserrat;
+   font-style: normal;
+   font-weight: normal;
+   font-size: 14px;
+   line-height: 100%;
+   display: flex;
+   align-items: center;
+   color: #414040;
+}
+
+.shop_block_click{
+   width: 210px;
+   height: 43.91px;
+   margin-top: 56px;
+   margin-left: 96px;
+}
+
+.shop_block_click button{
+   width: 210px;
+   height: 43px;
+   border: 2px solid #F12E6D;
+   box-sizing: border-box;
+   border-radius: 50px;
+   font-family: Montserrat;
+   font-style: normal;
+   font-weight: 600;
+   background: transparent;
+   font-size: 12px;
+   line-height: 100%;
+   color: #F12E6D;
+   text-transform: uppercase;
+   margin-right: 20px;
+}
+
+
+
+.shop_block_click button:hover{
+   background-color: #F12E6D;
+   color: white;
+   filter: drop-shadow(0px 20px 50px rgba(0, 0, 0, 0.1));
+   transition: all 0.45s ease-out;
+}
+
+.content{
+   max-width: 1170px;
+   display: flex;
+   margin-top: 84px;
+   margin-left: 40px;
+}
+
+.carousel_block{
+   margin-left: 40px;
+}
+
+.content_block{
+   width: 100%;
+}
+
+.response_block_content_img img{
+border-radius: 50px;
+}
+
+.content_header{
+   font-family: Montserrat;
+   font-style: normal;
+   font-weight: bold;
+   font-size: 24px;
+   line-height: 100%;
+   align-items: center;
+   color: #474E95;
+   margin-bottom: 32px;
+}
+
+.content_button{
+   justify-content: flex-end;
+}
+
+.content2{
+   width: 79%;
+   text-align: end
+}
+
+.content_button a{
+   outline: none;
+  padding: 12px 30px;
+  text-decoration: none;
+  cursor: pointer;
+   border: transparent;
+   font-family: Montserrat;
+   font-style: normal;
+   background: transparent;
+   margin-right: 60px;
+   font-weight: 600;
+   font-size: 12px;
+   line-height: 100%;
+   align-items: center;
+   color: #D5D5D5;
+   text-transform: uppercase;
+}
+
+.content_button a:hover{
+   border: 2px solid #474E95;
+   outline: none;
+   box-sizing: border-box;
+   border-radius: 50px;
+   color: #474E95;
+   transition: all 0.5  5s ease-out;
+}
+
+
+.content_button button:focus{
+   border: 2px solid #474E95;
+   outline: none;
+   box-sizing: border-box;
+   border-radius: 50px;
+   color: #474E95;
+   transition: all 0.5  5s ease-out;
+}
+
+.content_button button:last-child{
+   margin-right:0px;
+}
+
+.response_block{
+   max-width: 1170px;
+   margin-bottom: 36px;
+   height: 311px;
+   display: flex;
+   background: #FDFDFD;
+   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.06);
+}
+
+.response_block_content{
+   text-align: center;
+   display: block;
+   width: 220px;
+   height: 216px;
+   padding-top: 50px;
+   margin-left: 54px;
+}
+
+.response_block_content_username{
+   margin-top: 12px;
+   font-family: Montserrat;
+   font-style: normal;
+   font-weight: bold;
+   font-size: 16px;
+   line-height: 100%;
+   color: #000000
+}
+
+.response_block_content_date_push{
+   margin-top: 8px;
+   font-family: Montserrat;
+   font-style: normal;
+   font-weight: normal;
+   font-size: 16px;
+   line-height: 100%;
+   color: #0A0A0A;
+}
+
+.response_block_content_ball{
+   margin-top: 26px;
+   margin-left: 130px;
+   display: inline-flex;
+   width: 500px;
+   height: 50px;
+   align-items: flex-start;
+}
+
+.response_block_content_star{
+   align-items: center;
+   margin-right: 10px;
+}
+
+.response_block_content_rating{
+   margin-top: 3px;
+   font-family: Montserrat;
+   font-style: normal;
+   font-weight: 600;
+   font-size: 24px;
+   line-height: 100%;
+   display: flex;
+   align-items: center;
+   color: #414040;
+}
+
+.response_block_content_good{
+   margin-top: 4px;
+   margin-left: 10px;
+   font-family: Montserrat;
+   font-style: normal;
+   font-weight: bold;
+   font-size: 20px;
+   line-height: 100%;
+   color: #7BEDAB
+}
+
+.response_block_content_bad{
+   margin-top: 4px;
+   margin-left: 10px;
+   font-family: Montserrat;
+   font-style: normal;
+   font-weight: bold;
+   font-size: 20px;
+   line-height: 100%;
+   color: #ED7B7B
+}
+
+.response_block_content_text{
+   margin-left: 130px;
+}
+
+.response_block_content_text_header{
+   font-family: Montserrat;
+   font-style: normal;
+   font-weight: 500;
+   font-size: 16px;
+   line-height: 100%;
+   display: flex;
+   align-items: center;
+   color: #000000;
+}
+
+.response_block_content_text_content{
+   margin-top: 20px;
+   font-family: Montserrat;
+   font-style: normal;
+   font-weight: normal;
+   font-size: 16px;
+   line-height: 130%;
+   display: flex;
+   align-items: center;
+   color: #000000;
+}
+
+.response_block_content_interesting{
+   margin-left: 150px;
+   margin-top: 20px;
+}
+
+.Arrow{
+   position: absolute;
+    right: 50px;
+    top: 60px;
+    bottom: 0;
+    z-index: 1;
+    display: flex;
+    justify-content: flex-end;
+    width: 50%;
+    text-align: center;
+    transition: opacity .15s ease;
+}
+
+.arrow_block{
+   position: absolute;
+   width: 200px;
+   height: 200px;
+   right: 0;
+   margin-bottom: 30px;
+}
+
+.styleArrowLeft span{
+   width: 53px;
+   height: 53px;
+   background-image:url("../../assets/images/Влевонезар.svg"); 
+}
+
+.styleArrowLeft span:hover{
+   background: url("../../assets/images/Влево.svg");
+}
+
+.styleArrowLeft span:active{
+   background: url("../../assets/images/Влево.svg");
+}
+
+.styleArrowRight span{
+   width: 53px;
+   height: 53px;
+   background-image:url("../../assets/images/Вправонезар.svg")  
+}
+
+.styleArrowRight span:hover{
+   background: url("../../assets/images/Вправо.svg");
+}
+
+.styleArrowRight span:active{
+   background: url("../../assets/images/Вправо.svg");
+}
+
+@media (min-width: 320px) and (max-width: 480px) {
+   .content_link_list ul{
+      display: block;
+   }
+
+   main{
+      margin-left: 30px;
+   }
+
+   .content_link_list li{
+      width: 100%;
+      margin-bottom: 20px;
+   }
+
+   .shop_block_infoleft li:first-child{
+      margin-top: 20px;
+   }
+
+   .content_link_list li::after{
+      content: "";
+   }
+
+   .shop_block_content{
+      display: block;
+   }
+
+   .shop_block_content_img img{
+      margin-top: 20px;
+   }
+
+   .shop_block{
+      width: 350px;
+      height: 380px;
+   }
+
+   .shop_block_details_rating_ball_block{
+      margin-left: 81px;
+   }
+
+   .content{
+      display: block;
+   }
+
+   .content_button{
+      margin-bottom: 20px;
+   }
+
+   .response_block{
+      width: 100%;
+      display: block;
+      height: 100%;
+   }
+   
+   .response_block_content{
+      margin-left: 65px;
+   }
+
+   .response_block_content_text{
+      margin-left: 30px;
+   }
+
+   .response_block_content_ball{
+      margin-left: 10px;
+   }
+
+   .response_block_content_text_content{
+      padding-bottom: 40px;
+      }
+}

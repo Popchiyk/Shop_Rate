@@ -1,0 +1,122 @@
+<app-header></app-header>
+<main>
+   <div class="content_account">
+      <div class="content_account_block">
+         <div class="content_account_block_text">
+            <div class="content_account_block_text_img">
+                <img *ngIf="!isImg" alt="" src="../../assets/images/Anonimus.svg">
+                  <img  *ngIf="isImg" alt="" [src]="img" width="50px" height="50px">
+            </div>   
+            <div class="content_account_block_text_details">
+               <div class="content_account_block_text_username">
+                  {{username}}
+               </div>
+               <div class="content_account_block_text_name_surname">
+                 {{user?.surname}} {{user?.name}}
+               </div>
+               <div class="content_account_block_text_button">
+                  <button (click)="HrefToProfile()">Змінити</button>
+               </div>
+            </div>
+         </div>
+      </div>
+    
+      </div>
+   <div class="content_shop_list">
+      <div class="content_link_list"> 
+         <ul>
+            <li class="selectedLink"><a href="favourite">Улюблені</a></li>
+            <li><a href="accountSetting">Редагувати</a></li>   
+            <li><a href="accountLoginAndPassword">Пароль і логін</a></li>
+         </ul>
+      </div>
+    </div>
+   
+   <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+      <div class="carousel-inner" id="carousel_block">
+         <div class="empty_favourite" *ngIf="arr?.length==0">
+           На жаль не має у вас улюблених магазинів :)
+         </div>   
+         <div class="carousel-item " *ngFor="let shops of arr;let i=index"  [ngClass]="{'active': i == 0 }" id="{{i/4}}" >
+            <div class="content_shop" >
+               <ul>
+                  <li *ngFor="let item of shops">
+                     
+                     <div class="shop_block">
+                        <div class="shop_block_logo">
+                           <img alt="" [src]="item.logo">             
+                        </div>
+                        <div class="shop_block_text_block">
+                           <div class="shop_block_text_block_header">
+                              {{item?.name_shop}}
+                           </div>
+                           <div class="shop_block_text_block_star">
+                              <div class="test">
+                              <svg width="28" height="27" viewBox="0 0 28 27" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin-bottom: 13px;">
+                                 <path d="M25.6003 12.585C25.8791 12.3773 26.0859 12.0876 26.1917 11.7565C26.2975 11.4254 26.297 11.0695 26.1903 10.7387C26.0836 10.4079 25.8761 10.1187 25.5967 9.91184C25.3174 9.70494 24.9804 9.59063 24.6328 9.58496L17.8828 9.32996C17.8497 9.32767 17.8178 9.31583 17.7912 9.29587C17.7646 9.27591 17.7443 9.24868 17.7328 9.21746L15.4003 2.91746C15.2832 2.59694 15.0703 2.32017 14.7906 2.12463C14.5109 1.92909 14.1779 1.82422 13.8366 1.82422C13.4953 1.82422 13.1623 1.92909 12.8826 2.12463C12.6029 2.32017 12.39 2.59694 12.2728 2.91746L9.94784 9.23996C9.93635 9.27118 9.91608 9.29841 9.88946 9.31837C9.86285 9.33833 9.83103 9.35017 9.79784 9.35246L3.04784 9.60746C2.7003 9.61313 2.36324 9.72744 2.08394 9.93434C1.80464 10.1412 1.59709 10.4304 1.4904 10.7612C1.38371 11.092 1.38324 11.4479 1.48903 11.779C1.59483 12.1101 1.8016 12.3998 2.08034 12.6075L7.37534 16.77C7.40184 16.7908 7.42165 16.819 7.43231 16.851C7.44298 16.883 7.44403 16.9174 7.43534 16.95L5.61284 23.4075C5.5184 23.7363 5.52755 24.0862 5.63905 24.4097C5.75054 24.7331 5.95897 25.0144 6.23598 25.2152C6.51299 25.416 6.84513 25.5265 7.18721 25.5319C7.52929 25.5372 7.86471 25.437 8.14784 25.245L13.7428 21.495C13.7704 21.4759 13.8031 21.4657 13.8366 21.4657C13.8701 21.4657 13.9028 21.4759 13.9303 21.495L19.5253 25.245C19.8046 25.4436 20.1389 25.5503 20.4816 25.5503C20.8243 25.5503 21.1585 25.4436 21.4378 25.245C21.7149 25.0461 21.9236 24.7662 22.035 24.4438C22.1465 24.1215 22.1553 23.7725 22.0603 23.445L20.2228 16.965C20.2131 16.9324 20.2136 16.8977 20.2244 16.8655C20.2351 16.8333 20.2555 16.8051 20.2828 16.785L25.6003 12.585Z" fill="#F12E6D"/>
+                                 </svg>
+                                 <div class="shop_block_text_block_ball">
+                                    <ul>
+                                       <li>{{item.ball}}.0</li>                                   
+                                       <li>{{item.response}} відгуків</li>
+                                    </ul>
+                                 </div> 
+                                 <div class="kategory">
+                                    <ul>
+                                       <li> {{item.id_Kategory.name_kategory}}</li>
+                                    </ul>
+                                 </div>
+                           </div>
+                                 <div class="shop_block_text_block_button">
+                                    <ul>
+                                       <li><a href="infoshop/{{item.id}}">Перейти</a></li>
+                                       <li class="favourite" ><svg width="44" height="55" viewBox="0 0 44 55" fill="none" xmlns="http://www.w3.org/2000/svg" (click)="DeleteFavourite(item.subscribeID)">
+                                          <g filter="url(#filter0_d)">
+                                          <path d="M6 7.37509C6 5.94953 6.5619 4.58235 7.5621 3.57433C8.56229 2.5663 9.91885 2 11.3333 2H32.6667C34.0812 2 35.4377 2.5663 36.4379 3.57433C37.4381 4.58235 38 5.94953 38 7.37509V43.6569C37.9999 43.9 37.9343 44.1385 37.8104 44.347C37.6864 44.5555 37.5086 44.7262 37.296 44.8409C37.0834 44.9556 36.8439 45.0101 36.603 44.9985C36.3621 44.9869 36.1288 44.9096 35.928 44.7749L22 37.2095L8.072 44.7749C7.87121 44.9096 7.63795 44.9869 7.39704 44.9985C7.15614 45.0101 6.91662 44.9556 6.704 44.8409C6.49138 44.7262 6.31361 44.5555 6.18964 44.347C6.06566 44.1385 6.00012 43.9 6 43.6569V7.37509ZM11.3333 4.68754C10.6261 4.68754 9.94781 4.97069 9.44772 5.47471C8.94762 5.97872 8.66667 6.66231 8.66667 7.37509V41.1468L21.2613 34.4763C21.4802 34.3295 21.7371 34.2512 22 34.2512C22.2629 34.2512 22.5198 34.3295 22.7387 34.4763L35.3333 41.1468V7.37509C35.3333 6.66231 35.0524 5.97872 34.5523 5.47471C34.0522 4.97069 33.3739 4.68754 32.6667 4.68754H11.3333Z" fill="#474E95"/>
+                                          <path d="M8.5064 23.795L24.2873 32.9775L8.5064 42.1599V23.795Z" fill="#474E95"/>
+                                          <path d="M20.8899 35.0062L36.0608 24.8329L37.2172 43.1608L20.8899 35.0062Z" fill="#474E95"/>
+                                          <path d="M7.6732 4.52945H36.1176V34.8829H7.6732V4.52945Z" fill="#474E95"/>
+                                          </g>
+                                          <path d="M20.0044 25.3888L14.9911 20.4037C14.9622 20.3749 14.9393 20.3407 14.9236 20.3031C14.908 20.2655 14.8999 20.2251 14.8999 20.1843C14.8999 20.1435 14.908 20.1032 14.9236 20.0655C14.9393 20.0279 14.9622 19.9937 14.9911 19.9649L16.2568 18.6979C16.3777 18.577 16.5732 18.577 16.6941 18.6979L19.9946 21.9787C20.1155 22.0996 20.3124 22.0982 20.4333 21.9773L27.7261 14.6142C27.8471 14.4918 28.0439 14.4918 28.1663 14.6127L29.4333 15.8798C29.5543 16.0007 29.5543 16.1962 29.4347 16.3171L21.4894 24.3342L21.4908 24.3356L20.4432 25.3888C20.3222 25.5098 20.1253 25.5098 20.0044 25.3888Z" fill="#FFFCFC" stroke="white" stroke-width="0.75" stroke-miterlimit="10"/>
+                                          <defs>
+                                          <filter id="filter0_d" x="0" y="0" width="44" height="55" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                                          <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+                                          <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"/>
+                                          <feOffset dy="4"/>
+                                          <feGaussianBlur stdDeviation="3"/>
+                                          <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.06 0"/>
+                                          <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow"/>
+                                          <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape"/>
+                                          </filter>
+                                          </defs>
+                                          </svg>
+                                          </li>
+                                    </ul>
+                                 </div>
+                                
+                           </div>
+                         
+                        </div>
+                        </div>
+                  </li>
+                  </ul>
+           </div>
+           </div>
+      </div>
+      <div class="Arrow" *ngIf="arr?.length!=0">
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls"  data-bs-slide="prev">
+         <div class="styleArrowLeft">
+         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Предыдущий</span>
+        </div>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls"  data-bs-slide="next">
+         <div class="styleArrowRight">
+         <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Следующий</span>
+        </div>
+      </button>
+   </div>
+    </div>
+</main>
+<app-footer></app-footer>

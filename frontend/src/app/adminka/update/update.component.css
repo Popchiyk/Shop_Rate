@@ -1,0 +1,16 @@
+.alert-success{
+   text-align: center;
+}
+
+.container{
+   max-width: 500px;
+   margin-bottom: 40px;
+}
+
+input[type='text'].ng-dirty.ng-invalid {
+   border:1px solid red;
+}
+
+input[type='email'].ng-dirty.ng-invalid {
+   border:1px solid red;
+}

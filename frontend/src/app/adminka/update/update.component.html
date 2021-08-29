@@ -1,0 +1,61 @@
+<app-headingforadm></app-headingforadm>
+<div class="container">
+  <div class="alert alert-success" role="alert" *ngIf="isSuccesful" style="max-width: 500px;">
+    Дані було успішно оновленні
+  </div>
+<main *ngIf="isShops">
+   <div class="container">
+      <figure class="text-center">
+         <blockquote class="blockquote">
+           <p>Оновлення до таблиці Магазину</p>
+         </blockquote>
+       </figure>
+      <form [formGroup]='formInfoShop' (ngSubmit)="UpdateShop()">   
+         <div class="mb-3">
+           <label for="exampleInputText1"  class="form-label" >Назва магазину</label>
+           <input type="text" class="form-control"[formControlName]="'name'" value="{{shop?.name_shop}}" id="exampleInputText1">
+         </div>
+         <div class="mb-3">
+            <label for="exampleInputText1"  class="form-label" >Телефон</label>
+            <input type="text" class="form-control"[formControlName]="'phone'" value="{{shop?.phone}}"id="exampleInputText1">
+          </div>
+          <div class="mb-3">
+            <label for="exampleInputEmail1"  class="form-label" >Пошта</label>
+            <input type="email" class="form-control"[formControlName]="'email'" value="{{shop?.email}}" id="exampleInputEmail1">
+          </div>
+          <div class="mb-3">
+            <label for="exampleInputText1"  class="form-label" >Сайт</label>
+            <input type="text" class="form-control"[formControlName]="'website'" value="{{shop?.website}}" id="exampleInputText1">
+          </div>
+          <div class="mb-3">
+            <label for="exampleInputText1"  class="form-label" >Контакта людина</label>
+            <input type="text" class="form-control" [formControlName]="'contact_people'" value="{{shop?.contacts_people}}" id="exampleInputText1">
+          </div>
+          <div class="mb-3">
+            <label for="exampleInputText1"  class="form-label" >Категорія</label>
+            <select class="form-select" [formControlName]="'kategory'" >
+               <option  *ngFor="let kategor of kategory" value="{{kategor.id_kategory}}">{{kategor.name_kategory}}</option>
+             </select>
+             </div>
+         <button type="submit" class="btn btn-primary">Змінити</button>
+       </form>
+   </div>
+</main>
+
+<main *ngIf="isKategory">
+     
+   <div class="container">
+      <figure class="text-center">
+         <blockquote class="blockquote">
+           <p>Змінення до таблиці Категорій</p>
+         </blockquote>
+       </figure>
+      <form [formGroup]='formKategory' (ngSubmit)="UpdateKategory()">   
+         <div class="mb-3">
+           <label for="exampleInputText1"  class="form-label" >Назва категорії</label>
+           <input type="text" class="form-control" [formControlName]="'name_kategory'" value="{{findkategory?.name_kategory}}" id="exampleInputText1">
+         </div>
+         <button type="submit" class="btn btn-primary">Додати</button>
+       </form>
+   </div>
+</main>
