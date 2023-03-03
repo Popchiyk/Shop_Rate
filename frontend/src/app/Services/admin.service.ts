@@ -11,48 +11,48 @@ import { Userfullinfo } from './Classes/UserFullInfo';
   providedIn: 'root'
 })
 export class AdminService {
-  ipv4="192.168.1.10";
+  ipv4="localhost:8081";
   constructor(private http:HttpClient) { }
 
  
   public GetAllUser():Observable<Userfullinfo[]>{
-    return this.http.get<Userfullinfo[]>("http://"+this.ipv4+":8080/admin/users")
+    return this.http.get<Userfullinfo[]>("http://"+this.ipv4+"/admin/users")
   }
 
   public GetAllShop():Observable<Shop[]>{
-    return this.http.get<Shop[]>("http://"+this.ipv4+":8080/admin/shops")
+    return this.http.get<Shop[]>("http://"+this.ipv4+"/admin/shops")
   }
 
   public GetAllKategory():Observable<Kategory>{
-    return this.http.get<Kategory>("http://"+this.ipv4+":8080/admin/kategorys")
+    return this.http.get<Kategory>("http://"+this.ipv4+"/admin/kategorys")
   }
 
   public GetAllReview():Observable<Review>{
-    return this.http.get<Review>("http://"+this.ipv4+":8080/admin/reviews")
+    return this.http.get<Review>("http://"+this.ipv4+"/admin/reviews")
   }
 
   public AddShop(shop:ShopRequest):Observable<any>{
-    return this.http.post("http://"+this.ipv4+":8080/admin/add/shop",shop)
+    return this.http.post("http://"+this.ipv4+"/admin/add/shop",shop)
   } 
 
   public onLoadImageShop(updateImg :FormData,id:number):Observable<any>{
-    return this.http.post('http://'+this.ipv4+':8080/shop/addimg/'+id,updateImg);
+    return this.http.post('http://'+this.ipv4+'/shop/addimg/'+id,updateImg);
   }
 
   public AddKategory(kategory:string):Observable<any>{
-    return this.http.post('http://'+this.ipv4+':8080/admin/add/kategory',kategory)
+    return this.http.post('http://'+this.ipv4+'/admin/add/kategory',kategory)
   }
 
   public FindShop(id:number):Observable<Shop>{
-    return this.http.get<Shop>('http://'+this.ipv4+':8080/shop/find/'+id)
+    return this.http.get<Shop>('http://'+this.ipv4+'/shop/find/'+id)
   }
 
   public UpdateShop(shop:ShopRequest,id:number):Observable<any>{
-    return this.http.put<any>('http://'+this.ipv4+':8080/admin/update/shop/'+id,shop)
+    return this.http.put<any>('http://'+this.ipv4+'/admin/update/shop/'+id,shop)
   }
 
   public  FindKategory(id:number):Observable<Kategory>{
-    return this.http.get<Kategory>('http://'+this.ipv4+':8080/admin/find/kategory/'+id)
+    return this.http.get<Kategory>('http://'+this.ipv4+'/admin/find/kategory/'+id)
   }
 
   public UpdateKategory(id:number,kategory:string):Observable<any>{
@@ -60,18 +60,18 @@ export class AdminService {
   }
 
   public DeleteShop(id:number):Observable<void>{
-    return this.http.delete<void>('http://'+this.ipv4+':8080/admin/delete/shop/'+id)
+    return this.http.delete<void>('http://'+this.ipv4+'/admin/delete/shop/'+id)
   }
   
   public DeleteKategory(id:number):Observable<void>{
-    return this.http.delete<void>('http://'+this.ipv4+':8080/admin/delete/kategory/'+id)
+    return this.http.delete<void>('http://'+this.ipv4+'/admin/delete/kategory/'+id)
   }
 
   public DeleteUser(id:number):Observable<void>{
-    return this.http.delete<void>('http://'+this.ipv4+':8080/admin/delete/user/'+id)
+    return this.http.delete<void>('http://'+this.ipv4+'/admin/delete/user/'+id)
   }
 
   public DeleteReview(id:number):Observable<void>{
-    return this.http.delete<void>('http://'+this.ipv4+':8080/admin/delete/review/'+id)
+    return this.http.delete<void>('http://'+this.ipv4+'/admin/delete/review/'+id)
   }
 }

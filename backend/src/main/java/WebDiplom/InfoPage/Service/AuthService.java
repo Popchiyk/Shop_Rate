@@ -1,85 +1,92 @@
-package WebDiplom.InfoPage.Service;
+package WebDiplom.InfoPage.service;
 
-import WebDiplom.InfoPage.Repository.RoleRepository;
-import WebDiplom.InfoPage.Repository.UserRepository;
-import WebDiplom.InfoPage.Security.JwtProvider;
-import WebDiplom.InfoPage.dto.LoginRequest;
-import WebDiplom.InfoPage.dto.RegisterRequest;
-import WebDiplom.InfoPage.dto.RoleDto;
-import WebDiplom.InfoPage.Models.RoleEntity;
-import WebDiplom.InfoPage.Models.UserEntity;
-import WebDiplom.InfoPage.dto.UserRequestLoginAndPassword;
+import WebDiplom.InfoPage.dto.*;
+import WebDiplom.InfoPage.repository.IRoleRepository;
+import WebDiplom.InfoPage.repository.IUserRepository;
+import WebDiplom.InfoPage.models.Role;
+import WebDiplom.InfoPage.models.User;
+import WebDiplom.InfoPage.security.JwtUtils;
+import WebDiplom.InfoPage.security.UserDetailsImpl;
+import lombok.RequiredArgsConstructor;
+import lombok.var;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
-import java.util.Collection;
+import java.util.HashSet;
+import java.util.stream.Collectors;
 
 @Service
+@RequiredArgsConstructor
 public class AuthService {
+    private final IUserRepository userRepository;
+    private final PasswordEncoder encoder;
+    private final AuthenticationManager authenticationManager;
+    private final JwtUtils jwtUtils;
+    private final IRoleRepository roleRepository;
 
-    @Autowired
-    private UserRepository userRepository;
-    @Autowired
-    private PasswordEncoder passwordEncoder;
-    @Autowired
-    private AuthenticationManager authenticationManager;
-    @Autowired
-    private JwtProvider jwtProvider;
-    @Autowired
-    private RoleRepository roleRepository;
-    @Autowired
-    private AdminService adminService;
-    public void signup(RegisterRequest registerRequest) {
-        UserEntity user = new UserEntity();
-        user.setUserName(registerRequest.getUsername());
-        user.setEmail(registerRequest.getEmail());
-        user.setPassword(encodePassword(registerRequest.getPassword()));
-        user.setName(registerRequest.getName());
-        user.setLastname(registerRequest.getLastname());
-        user.setSurname(registerRequest.getSurname());
-        user.setPhone(registerRequest.getPhone());
-        user.setRoles(Arrays.asList(roleRepository.findByName("ROLE_USER")));
+
+    public String signup(RegisterRequest registerRequest) {
+
+        if (userRepository.existsByUserName(registerRequest.getUsername())) {
+            throw new IllegalArgumentException("Username " + registerRequest.getUsername() + " already exist");
+        }
+
+        var user = User.builder()
+                .userName(registerRequest.getUsername())
+                .password(encoder.encode(registerRequest.getPassword()))
+                .roles(new HashSet<>(Arrays.asList(mapStringToRole("ROLE_USER"))))
+                .phone(registerRequest.getPhone())
+                .email(registerRequest.getEmail())
+                .surname(registerRequest.getSurname())
+                .logo(null)
+                .name(registerRequest.getName())
+                .lastname(registerRequest.getLastname())
+                .build();
+        userRepository.save(user);
+        return "User was successfully created";
+    }
+
+    public void UpdateLoginAndPassword(String username, UserRequestLoginAndPassword userRequestLoginAndPassword) {
+        User user = userRepository.findByUserName(username).orElseThrow(() ->
+                new UsernameNotFoundException("Користувача не знайдено"));
+        if (encoder.matches(userRequestLoginAndPassword.getOldpassword(), user.getPassword())) {
+            user.setPassword(encoder.encode(userRequestLoginAndPassword.getPassword()));
+            user.setUserName(userRequestLoginAndPassword.getLogin());
+        }
+
         userRepository.save(user);
     }
 
-    public void UpdateLoginAndPassword(String username, UserRequestLoginAndPassword userRequestLoginAndPassword){
-        UserEntity userEntity = userRepository.findByUserName(username).orElseThrow(() ->
-                new UsernameNotFoundException("Користувача не знайдено"));
-        PasswordEncoder passencoder = new BCryptPasswordEncoder();
-        if(passencoder.matches(userRequestLoginAndPassword.getOldpassword(),userEntity.getPassword())){
-            userEntity.setPassword(encodePassword(userRequestLoginAndPassword.getPassword()));
-            userEntity.setUserName(userRequestLoginAndPassword.getLogin());
-        }
 
-        userRepository.save(userEntity);
+    public LoginResponse authenticateRequest(LoginRequest request) {
+
+        var auth = authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword())
+        );
+
+        SecurityContextHolder.getContext().setAuthentication(auth);
+        var jwt = jwtUtils.generateJwtToken(auth);
+        var details = (UserDetailsImpl) auth.getPrincipal();
+        var roles = details.getAuthorities().stream()
+                .map(GrantedAuthority::getAuthority)
+                .collect(Collectors.toList());
+
+        return LoginResponse.builder()
+                .jwt(jwt)
+                .username(details.getUsername())
+                .roles(roles)
+                .build();
     }
 
-    private String encodePassword(String password) {
-        return passwordEncoder.encode(password);
-    }
-
-    public AuthenticationResponse login(LoginRequest loginRequest) {
-        Authentication authenticate = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getUsername(),
-                loginRequest.getPassword()));
-        SecurityContextHolder.getContext().setAuthentication(authenticate);
-        String authenticationToken = jwtProvider.generateToken(authenticate);
-        UserEntity user = userRepository.findByUserName(loginRequest.getUsername()).orElseThrow(()->
-                new UsernameNotFoundException("Користувача не знайдено"));
-        Collection<RoleEntity> role = user.getRoles();
-        RoleEntity[] roles = user.getRoles().toArray(new RoleEntity[0]);
-        RoleDto[] roleDto = new RoleDto[roles.length];
-        for(int i=0;i<roles.length;i++){
-            roleDto[i] = adminService.roleEntityToDto(roles[i]);
-        }
-
-            return new AuthenticationResponse(authenticationToken, loginRequest.getUsername(),roleDto[0].getName());
+    private Role mapStringToRole(String roleString) {
+        return roleRepository.findByName(Role.ERole.valueOf(roleString))
+                .orElseThrow(() -> new IllegalArgumentException("Wrong name of role" + roleString));
     }
 }

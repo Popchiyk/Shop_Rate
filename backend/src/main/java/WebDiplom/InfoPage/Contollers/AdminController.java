@@ -1,18 +1,16 @@
-package WebDiplom.InfoPage.Contollers;
+package WebDiplom.InfoPage.contollers;
 
 
-import WebDiplom.InfoPage.Service.AdminService;
-import WebDiplom.InfoPage.Service.AuthService;
-import WebDiplom.InfoPage.Service.UserService;
+import WebDiplom.InfoPage.service.AdminService;
+import WebDiplom.InfoPage.service.UserService;
 import WebDiplom.InfoPage.dto.ShopDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
 @RestController
-@RequestMapping("/admin")
+@RequestMapping("/api/v1/admin")
 public class AdminController {
     @Autowired
     private AdminService adminService;

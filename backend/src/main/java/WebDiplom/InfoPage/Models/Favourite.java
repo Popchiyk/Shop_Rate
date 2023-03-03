@@ -1,4 +1,4 @@
-package WebDiplom.InfoPage.Models;
+package WebDiplom.InfoPage.models;
 
 import javax.persistence.*;
 
@@ -7,10 +7,11 @@ import javax.persistence.*;
 public class Favourite {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", updatable = false, nullable = false, unique=true)
     private Long id;
     @ManyToOne
     @JoinColumn(name="id_users",nullable = false)
-    private UserEntity id_users;
+    private User id_users;
     @ManyToOne
     @JoinColumn(name = "id_shop",nullable = false)
     private InfoShop id_shop;
@@ -26,11 +27,11 @@ public class Favourite {
         this.id = id;
     }
 
-    public UserEntity getId_users() {
+    public User getId_users() {
         return id_users;
     }
 
-    public void setId_users(UserEntity id_users) {
+    public void setId_users(User id_users) {
         this.id_users = id_users;
     }
 

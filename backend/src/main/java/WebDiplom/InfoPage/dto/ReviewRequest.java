@@ -1,8 +1,6 @@
 package WebDiplom.InfoPage.dto;
 
 
-import WebDiplom.InfoPage.Models.UserEntity;
-
 public class ReviewRequest {
         private Long id;
         private Integer ball;

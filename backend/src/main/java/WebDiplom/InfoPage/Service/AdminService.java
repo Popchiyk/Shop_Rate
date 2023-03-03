@@ -1,19 +1,13 @@
-package WebDiplom.InfoPage.Service;
+package WebDiplom.InfoPage.service;
 
-import WebDiplom.InfoPage.Models.*;
-import WebDiplom.InfoPage.Repository.*;
+import WebDiplom.InfoPage.models.*;
+import WebDiplom.InfoPage.repository.*;
 import WebDiplom.InfoPage.dto.RoleDto;
 import WebDiplom.InfoPage.dto.*;
     import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
-import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.Base64;
@@ -22,21 +16,21 @@ import java.util.List;
 @Service
 public class AdminService {
     @Autowired
-    UserRepository userRepository;
+    IUserRepository IUserRepository;
 
     @Autowired
-    RoleRepository roleRepository;
+    IRoleRepository IRoleRepository;
     @Autowired
     private PasswordEncoder passwordEncoder;
     @Autowired
-    KategoryRepository kategoryRepository;
+    ICategoryRepository ICategoryRepository;
     @Autowired
-    InfoShopRepository infoShopRepository;
+    IInfoShopRepository IInfoShopRepository;
     @Autowired
-    ReviewRepository reviewRepository;
+    IReviewRepository IReviewRepository;
 
     public List<KategoryDto> selectallKategory() {
-        Kategory[] kategories = kategoryRepository.findAll().toArray(new Kategory[0]);
+        Kategory[] kategories = ICategoryRepository.findAll().toArray(new Kategory[0]);
         KategoryDto[] kategoryDtos = new KategoryDto[kategories.length];
         if(kategories.length>0){
             for (int i = 0; i < kategories.length; i++) {
@@ -52,13 +46,13 @@ public class AdminService {
 
     public List<InfoShopRequest> selectAllShop() {
         int sum = 0, count = 0;
-        InfoShop[] infoShops = infoShopRepository.findAll().toArray(new InfoShop[0]);
+        InfoShop[] infoShops = IInfoShopRepository.findAll().toArray(new InfoShop[0]);
         InfoShopRequest[] infoShopRequests = new InfoShopRequest[infoShops.length];
         for (int i = 0; i < infoShops.length; i++) {
             InfoShopRequest infoShopRequest = new InfoShopRequest();
-            ReviewEntity[] reviewEntityShop = reviewRepository.findAllById(infoShops[i]).toArray(new ReviewEntity[0]);
-            if(reviewEntityShop.length>0){
-                for (ReviewEntity entity : reviewEntityShop) {
+            Review[] reviewShop = IReviewRepository.findAllById(infoShops[i]).toArray(new Review[0]);
+            if(reviewShop.length>0){
+                for (Review entity : reviewShop) {
                     count++;
                     sum = sum + entity.getBall();
                 }
@@ -96,7 +90,7 @@ public class AdminService {
 
 
     public List<ReviewRequest> selectallreview(){
-        ReviewEntity[] reviewEntities = reviewRepository.findAll().toArray(new ReviewEntity[0]);
+        Review[] reviewEntities = IReviewRepository.findAll().toArray(new Review[0]);
         ReviewRequest[] reviewRequests = new ReviewRequest[reviewEntities.length];
         for(int i=0;i<reviewEntities.length;i++){
             ReviewRequest reviewRequest= new ReviewRequest();
@@ -116,11 +110,11 @@ public class AdminService {
     }
 
     public List<UserFullInfoDto> selectalluser(){
-        UserEntity[] userEntities = userRepository.findAll().toArray(new UserEntity[0]);
+        User[] userEntities = IUserRepository.findAll().toArray(new User[0]);
         UserFullInfoDto[] userFullInfoDto = new UserFullInfoDto[userEntities.length];
         for(int i=0;i<userEntities.length;i++){
             UserFullInfoDto userFullInfoDto1 = new UserFullInfoDto();
-            userFullInfoDto1.setId(userEntities[i].getId());
+//            userFullInfoDto1.setId(userEntities[i].getId());
             userFullInfoDto1.setLogin(userEntities[i].getUserName());
             userFullInfoDto1.setEmail(userEntities[i].getEmail());
             userFullInfoDto1.setLastname(userEntities[i].getLastname());
@@ -136,15 +130,15 @@ public class AdminService {
         return Arrays.asList(userFullInfoDto);
     }
 
-    public RoleDto roleEntityToDto(RoleEntity roleEntity){
+    public RoleDto roleEntityToDto(Role roleEntity){
         RoleDto role = new RoleDto();
-        role.setName(roleEntity.getName());
+//        role.setName(roleEntity.getName());
         role.setId(roleEntity.getId());
         return role;
     }
 
     public void AddShop( ShopDto shopDto){
-        Kategory kategory = kategoryRepository.findById(shopDto.getKategory()).orElseThrow(() ->
+        Kategory kategory = ICategoryRepository.findById(shopDto.getKategory()).orElseThrow(() ->
                 new RuntimeException("Категорія не знайдено"));
         InfoShop infoShop = new InfoShop();
         infoShop.setName_shop(shopDto.getName());
@@ -153,19 +147,19 @@ public class AdminService {
         infoShop.setPhone(shopDto.getPhone());
         infoShop.setWebsite(shopDto.getWebsite());
         infoShop.setId_Kategory(kategory);
-        infoShopRepository.save(infoShop);
+        IInfoShopRepository.save(infoShop);
     }
 
     public void AddKategory(String kategory){
         Kategory kategory1 =  new Kategory();
         kategory1.setName_kategory(kategory);
-        kategoryRepository.save(kategory1);
+        ICategoryRepository.save(kategory1);
     }
 
     public void UpdateShop(Long id,ShopDto shopDto){
-        InfoShop infoShop = infoShopRepository.findById(id).orElseThrow(() ->
+        InfoShop infoShop = IInfoShopRepository.findById(id).orElseThrow(() ->
                 new RuntimeException("Магазин не знайдено"));
-        Kategory kategory = kategoryRepository.findById(shopDto.getKategory()).orElseThrow(() ->
+        Kategory kategory = ICategoryRepository.findById(shopDto.getKategory()).orElseThrow(() ->
                 new RuntimeException("Категорія не знайдено"));
         infoShop.setName_shop(shopDto.getName());
         infoShop.setEmail(shopDto.getEmail());
@@ -173,11 +167,11 @@ public class AdminService {
         infoShop.setPhone(shopDto.getPhone());
         infoShop.setWebsite(shopDto.getWebsite());
         infoShop.setId_Kategory(kategory);
-        infoShopRepository.save(infoShop);
+        IInfoShopRepository.save(infoShop);
     }
 
     public KategoryDto Findkategory(Long id){
-        Kategory kategory = kategoryRepository.findById(id).orElseThrow(() ->
+        Kategory kategory = ICategoryRepository.findById(id).orElseThrow(() ->
                 new RuntimeException("Магазин не знайдено"));
         KategoryDto kategoryDto = new KategoryDto();
         kategoryDto.setId_kategory(kategory.getId_kategory());
@@ -186,29 +180,29 @@ public class AdminService {
     }
 
     public void UpdateKategory(Long id, String kategory){
-        Kategory kategory1 = kategoryRepository.findById(id).orElseThrow(() ->
+        Kategory kategory1 = ICategoryRepository.findById(id).orElseThrow(() ->
                 new RuntimeException("Магазин не знайдено"));
         kategory1.setName_kategory(kategory);
-        kategoryRepository.save(kategory1);
+        ICategoryRepository.save(kategory1);
     }
 
     public void DeleteShop(Long id ){
-        infoShopRepository.delete(infoShopRepository.findById(id).orElseThrow(() ->
+        IInfoShopRepository.delete(IInfoShopRepository.findById(id).orElseThrow(() ->
                 new RuntimeException("Магазин не знайдено")));
     }
 
     public void DeleteReview(Long id){
-        reviewRepository.delete(reviewRepository.findById(id).orElseThrow(() ->
+        IReviewRepository.delete(IReviewRepository.findById(id).orElseThrow(() ->
                 new RuntimeException("Відгук не знайдено")));
     }
 
     public void DeleteKategory(Long id){
-        kategoryRepository.delete(kategoryRepository.findById(id).orElseThrow(() ->
+        ICategoryRepository.delete(ICategoryRepository.findById(id).orElseThrow(() ->
                 new RuntimeException("Категорія не знайдено")));
     }
 
     public void DeleteUser(Long id){
-        userRepository.delete(userRepository.findById(id).orElseThrow(() ->
+        IUserRepository.delete(IUserRepository.findById(id).orElseThrow(() ->
                 new RuntimeException("Категорія не знайдено")));
     }
 

@@ -1,12 +1,9 @@
 package WebDiplom.InfoPage.dto;
 
-import WebDiplom.InfoPage.Models.Kategory;
-import WebDiplom.InfoPage.Models.ReviewEntity;
+import WebDiplom.InfoPage.models.Kategory;
 
 import javax.persistence.Column;
-import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
-import javax.persistence.ManyToOne;
 
 public class InfoShopRequest {
     private  Long id;

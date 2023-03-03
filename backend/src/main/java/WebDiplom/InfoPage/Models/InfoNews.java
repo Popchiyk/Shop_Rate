@@ -1,4 +1,4 @@
-package WebDiplom.InfoPage.Models;
+package WebDiplom.InfoPage.models;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -8,6 +8,7 @@ import java.util.Date;
 public class InfoNews {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", updatable = false, nullable = false, unique=true)
     private Long id;
     private String name_news;
     private String  text;

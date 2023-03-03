@@ -1,4 +1,4 @@
-package WebDiplom.InfoPage.Service;
+package WebDiplom.InfoPage.service;
 
 
 import lombok.AllArgsConstructor;

@@ -1,12 +1,12 @@
-package WebDiplom.InfoPage.Service;
+package WebDiplom.InfoPage.service;
 
-import WebDiplom.InfoPage.Models.InfoShop;
-import WebDiplom.InfoPage.Models.ReviewEntity;
-import WebDiplom.InfoPage.Models.UserEntity;
-import WebDiplom.InfoPage.Repository.InfoShopRepository;
-import WebDiplom.InfoPage.Repository.ReviewRepository;
+import WebDiplom.InfoPage.models.InfoShop;
+import WebDiplom.InfoPage.models.Review;
+import WebDiplom.InfoPage.models.User;
+import WebDiplom.InfoPage.repository.IInfoShopRepository;
+import WebDiplom.InfoPage.repository.IReviewRepository;
 
-import WebDiplom.InfoPage.Repository.UserRepository;
+import WebDiplom.InfoPage.repository.IUserRepository;
 import WebDiplom.InfoPage.dto.ReviewDto;
 import WebDiplom.InfoPage.dto.ReviewRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,29 +19,29 @@ import java.util.List;
 @Service
 public class ReviewService {
     @Autowired
-    ReviewRepository reviewRepository;
+    IReviewRepository IReviewRepository;
     @Autowired
-    InfoShopRepository infoShopRepository;
+    IInfoShopRepository IInfoShopRepository;
     @Autowired
-    UserRepository userRepository;
+    IUserRepository IUserRepository;
 
     public void addReview(Long id, String username, ReviewDto reviewDto){
-        UserEntity userEntity =   userRepository.findByUserName(username).orElseThrow(() ->
+        User user =   IUserRepository.findByUserName(username).orElseThrow(() ->
                 new UsernameNotFoundException("Користувача не знайдено"));
-        InfoShop infoShop = infoShopRepository.findById(id).orElseThrow(() -> new RuntimeException("Магази не знайдено"));
-            ReviewEntity reviewEntity = new ReviewEntity();
-            reviewEntity.setId_shop(infoShop);
-            reviewEntity.setId_user(userEntity);
-            reviewEntity.setText(reviewDto.getText());
-            reviewEntity.setHeader(reviewDto.getHeader());
-            reviewEntity.setBall(reviewDto.getBall());
-            reviewEntity.setData(reviewDto.getData());
-            reviewRepository.save(reviewEntity);
+        InfoShop infoShop = IInfoShopRepository.findById(id).orElseThrow(() -> new RuntimeException("Магази не знайдено"));
+            Review review = new Review();
+            review.setId_shop(infoShop);
+            review.setId_user(user);
+            review.setText(reviewDto.getText());
+            review.setHeader(reviewDto.getHeader());
+            review.setBall(reviewDto.getBall());
+            review.setData(reviewDto.getData());
+            IReviewRepository.save(review);
     }
 
         public List<ReviewRequest>  findReviewById(Long id){
-            InfoShop infoShop = infoShopRepository.findById(id).orElseThrow(() -> new RuntimeException("Магази не знайдено"));
-            ReviewEntity[] reviewEntities = reviewRepository.findAllByShopId(infoShop).toArray(new ReviewEntity[0]);
+            InfoShop infoShop = IInfoShopRepository.findById(id).orElseThrow(() -> new RuntimeException("Магази не знайдено"));
+            Review[] reviewEntities = IReviewRepository.findAllByShopId(infoShop).toArray(new Review[0]);
             ReviewRequest[] reviewRequests = new ReviewRequest[reviewEntities.length];
             for(int i=0;i<reviewEntities.length;i++){
                     ReviewRequest reviewRequest= new ReviewRequest();

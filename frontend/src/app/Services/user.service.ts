@@ -15,78 +15,78 @@ import { UserInfoRequest } from './Classes/UserRequestInfo';
   providedIn: 'root'
 })
 export class UserService {
-  ipv4="192.168.1.10";
+  ipv4="localhost:8081";
   constructor(private http:HttpClient,private authService:AuthService) { }
   
   public UserInfo():Observable<UserDataInfo>{
-   return this.http.get<UserDataInfo>('http://'+this.ipv4+':8080/user/getInfoUser/'+this.authService.isLogin('username'))
+   return this.http.get<UserDataInfo>('http://'+this.ipv4+'/user/getInfoUser/'+this.authService.isLogin('username'))
   }
 
   public UpdateLoginAndPassword(oldLoginAndPass:UpdateLoginAndPassword):Observable<any>{
-    return this.http.put<any>("http://"+this.ipv4+":8080/auth/update/login/password/"+this.authService.isLogin('username'),oldLoginAndPass)
+    return this.http.put<any>("http://"+this.ipv4+"/auth/update/login/password/"+this.authService.isLogin('username'),oldLoginAndPass)
   }
 
   public onLoadImage(updateImg :FormData):Observable<any>{
-      return this.http.post('http://'+this.ipv4+':8080/user/setImg/'+this.authService.isLogin('username'),updateImg);
+      return this.http.post('http://'+this.ipv4+'/user/setImg/'+this.authService.isLogin('username'),updateImg);
   }
 
   public deleteImg():Observable<any>{
-    return this.http.post('http://'+this.ipv4+':8080/user/deleteImg/'+this.authService.isLogin('username'),null)
+    return this.http.post('http://'+this.ipv4+'/user/deleteImg/'+this.authService.isLogin('username'),null)
   }
 
   public UpdateData(userequest:UserInfoRequest):Observable<any>{
-    return this.http.post('http://'+this.ipv4+':8080/user/setInfo/'+this.authService.isLogin('username'),userequest);
+    return this.http.post('http://'+this.ipv4+'/user/setInfo/'+this.authService.isLogin('username'),userequest);
   }
 
   public GetAllShop():Observable<Shop[]>{
-    return this.http.get<Shop[]>('http://'+this.ipv4+':8080/shop/allShop');
+    return this.http.get<Shop[]>('http://'+this.ipv4+'/shop/allShop');
   }
 
   public OnLoadImageShop(updateImg:FormData,id:number):Observable<any>{
-    return this.http.post('http://'+this.ipv4+':8080/shop/addimg/'+id,updateImg);
+    return this.http.post('http://'+this.ipv4+'/shop/addimg/'+id,updateImg);
   }
 
   public GetAllKategory():Observable<Kategory[]>{
-    return this.http.get<Kategory[]>('http://'+this.ipv4+':8080/shop/kategory');
+    return this.http.get<Kategory[]>('http://'+this.ipv4+'/shop/kategory');
   }
 
   public FindShop(id:number):Observable<Shop>{
-    return this.http.get<Shop>('http://'+this.ipv4+':8080/shop/find/'+id)
+    return this.http.get<Shop>('http://'+this.ipv4+'/shop/find/'+id)
   }
 
   public FindReviewBySHop(id:number):Observable<Review[]>{
-    return this.http.get<Review[]>('http://'+this.ipv4+':8080/user/review/allpost/'+id)
+    return this.http.get<Review[]>('http://'+this.ipv4+'/user/review/allpost/'+id)
   }
 
   public Favourite(username:string):Observable<Shop[]>{
-    return this.http.get<Shop[]>('http://'+this.ipv4+':8080/user/getfavourite/'+username);
+    return this.http.get<Shop[]>('http://'+this.ipv4+'/user/getfavourite/'+username);
   }
 
   public findByKategory(id:number):Observable<Shop[]>{
-    return this.http.get<Shop[]>('http://'+this.ipv4+':8080/shop/kategory/find/'+id)
+    return this.http.get<Shop[]>('http://'+this.ipv4+'/shop/kategory/find/'+id)
   }
   
   public sendReview(revierequest:ReviewRequest,id:number):Observable<any>{
-    return this.http.post("http://"+this.ipv4+":8080/user/add/review/"+id+"/"+this.authService.isLogin('username'),revierequest);
+    return this.http.post("http://"+this.ipv4+"/user/add/review/"+id+"/"+this.authService.isLogin('username'),revierequest);
   }
 
   public GetAllForUser():Observable<Shop[]>{
-    return this.http.get<Shop[]>('http://'+this.ipv4+':8080/user/getall/shop/'+this.authService.isLogin('username'));
+    return this.http.get<Shop[]>('http://'+this.ipv4+'/user/getall/shop/'+this.authService.isLogin('username'));
   }
 
   public SetFavourite(id:number):Observable<any>{
-    return this.http.post("http://"+this.ipv4+":8080/shop/favourite/"+this.authService.isLogin('username')+"/"+id,null)
+    return this.http.post("http://"+this.ipv4+"/shop/favourite/"+this.authService.isLogin('username')+"/"+id,null)
   }
 
   public DeleteFavourite(id:number):Observable<any>{
-    return this.http.delete<any >('http://'+this.ipv4+':8080/user/delete/favourite/'+id)
+    return this.http.delete<any >('http://'+this.ipv4+'/user/delete/favourite/'+id)
   }
 
   public FindAllInfoForUser(id:number):Observable<Shop>{
-    return this.http.get<Shop>("http://"+this.ipv4+":8080/user/find/user/"+this.authService.isLogin('username')+"/"+id)
+    return this.http.get<Shop>("http://"+this.ipv4+"/user/find/user/"+this.authService.isLogin('username')+"/"+id)
   }
 
   public FindKategorybyUser(id:number):Observable<Shop[]>{
-    return this.http.get<Shop[]>("http://"+this.ipv4+":8080/user/find/kategory/"+this.authService.isLogin('username')+"/"+id)
+    return this.http.get<Shop[]>("http://"+this.ipv4+"/user/find/kategory/"+this.authService.isLogin('username')+"/"+id)
   }
 }

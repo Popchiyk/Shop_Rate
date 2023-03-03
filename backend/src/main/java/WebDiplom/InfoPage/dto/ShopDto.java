@@ -1,7 +1,5 @@
 package WebDiplom.InfoPage.dto;
 
-import WebDiplom.InfoPage.Models.Kategory;
-
 public class ShopDto {
     private String name;
     private String phone;

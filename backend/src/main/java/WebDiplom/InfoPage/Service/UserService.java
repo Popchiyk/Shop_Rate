@@ -1,10 +1,10 @@
-package WebDiplom.InfoPage.Service;
+package WebDiplom.InfoPage.service;
 
-import WebDiplom.InfoPage.Models.*;
-import WebDiplom.InfoPage.Repository.*;
+import WebDiplom.InfoPage.models.*;
+import WebDiplom.InfoPage.repository.*;
 import WebDiplom.InfoPage.dto.*;
-import WebDiplom.InfoPage.Models.InfoShop;
-import WebDiplom.InfoPage.Repository.KategoryRepository;
+import WebDiplom.InfoPage.models.InfoShop;
+import WebDiplom.InfoPage.repository.ICategoryRepository;
 import WebDiplom.InfoPage.dto.KategoryDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -20,21 +20,21 @@ import java.util.List;
 @Service
 public class UserService {
     @Autowired
-    UserRepository userRepository;
+    IUserRepository IUserRepository;
     @Autowired
     AdminService adminService;
     @Autowired
-    InfoShopRepository infoShopRepository;
+    IInfoShopRepository IInfoShopRepository;
     @Autowired
-    KategoryRepository kategoryRepository;
+    ICategoryRepository ICategoryRepository;
     @Autowired
-    FavouriteRepository favouriteRepository;
+    IFavouriteRepository IFavouriteRepository;
     @Autowired
-    ReviewRepository reviewRepository;
+    IReviewRepository IReviewRepository;
 
 
     public void saveImageShop(MultipartFile file, Long id) {
-        InfoShop infoShop = infoShopRepository.findById(id).orElseThrow(() -> new RuntimeException("Магази не знайдено"));
+        InfoShop infoShop = IInfoShopRepository.findById(id).orElseThrow(() -> new RuntimeException("Магази не знайдено"));
         String filename = StringUtils.cleanPath(file.getOriginalFilename());
         if (filename.contains("..")) {
             new Exception("Error");
@@ -44,53 +44,53 @@ public class UserService {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        infoShopRepository.save(infoShop);
+        IInfoShopRepository.save(infoShop);
     }
 
     public void saveImage(MultipartFile file, String username) {
-        UserEntity userEntity = userRepository.findByUserName(username).orElseThrow(() ->
+        User user = IUserRepository.findByUserName(username).orElseThrow(() ->
                 new UsernameNotFoundException("Користувача не знайдено"));
         String filename = StringUtils.cleanPath(file.getOriginalFilename());
         if (filename.contains("..")) {
             new Exception("Error");
         }
         try {
-            userEntity.setLogo(Base64.getEncoder().encodeToString(file.getBytes()));
+            user.setLogo(Base64.getEncoder().encodeToString(file.getBytes()));
         } catch (IOException e) {
             e.printStackTrace();
         }
-        userRepository.save(userEntity);
+        IUserRepository.save(user);
     }
 
     public void setInfo(String username, UserRequestUpdateData userRequestUpdateData) {
-        UserEntity userEntity = userRepository.findByUserName(username).orElseThrow(() ->
+        User user = IUserRepository.findByUserName(username).orElseThrow(() ->
                 new UsernameNotFoundException("Користувача не знайдено"));
-        userEntity.setName(userRequestUpdateData.getName());
-        userEntity.setLastname(userRequestUpdateData.getLastname());
-        userEntity.setSurname(userRequestUpdateData.getSurname());
-        userEntity.setLogo(userRequestUpdateData.getLogo());
-        userEntity.setPhone(userRequestUpdateData.getPhone());
-        userRepository.save(userEntity);
+        user.setName(userRequestUpdateData.getName());
+        user.setLastname(userRequestUpdateData.getLastname());
+        user.setSurname(userRequestUpdateData.getSurname());
+        user.setLogo(userRequestUpdateData.getLogo());
+        user.setPhone(userRequestUpdateData.getPhone());
+        IUserRepository.save(user);
     }
 
 
     public void setInfoLoginAndPassword(String username, UserRequestLoginAndPassword userRequestLoginAndPassword) {
-        UserEntity userEntity = userRepository.findByUserName(username).orElseThrow(() ->
+        User user = IUserRepository.findByUserName(username).orElseThrow(() ->
                 new UsernameNotFoundException("Користувача не знайдено"));
-        userEntity.setUserName(userRequestLoginAndPassword.getLogin());
-        userEntity.setPassword(userRequestLoginAndPassword.getPassword());
-        userRepository.save(userEntity);
+        user.setUserName(userRequestLoginAndPassword.getLogin());
+        user.setPassword(userRequestLoginAndPassword.getPassword());
+        IUserRepository.save(user);
     }
 
     public void deleteImg(String username) {
-        UserEntity userEntity = userRepository.findByUserName(username).orElseThrow(() ->
+        User user = IUserRepository.findByUserName(username).orElseThrow(() ->
                 new UsernameNotFoundException("Користувача не знайдено"));
-        userEntity.setLogo(null);
-        userRepository.save(userEntity);
+        user.setLogo(null);
+        IUserRepository.save(user);
     }
 
     public UserRequestUpdateData getUser(String username) {
-        UserEntity user = userRepository.findByUserName(username).orElseThrow(() ->
+        User user = IUserRepository.findByUserName(username).orElseThrow(() ->
                 new UsernameNotFoundException("Користувача не знайдено"));
         UserRequestUpdateData userRequestUpdateData = new UserRequestUpdateData();
         userRequestUpdateData.setName(user.getName());
@@ -116,9 +116,9 @@ public class UserService {
 
     public List<InfoShopRequest> getFavourite(String username) {
         int sum = 0, count = 0;
-        UserEntity user = userRepository.findByUserName(username).orElseThrow(() ->
+        User user = IUserRepository.findByUserName(username).orElseThrow(() ->
                 new UsernameNotFoundException("Користувача не знайдено"));
-        Favourite[] favourites = favouriteRepository.findAllByUserId(user).toArray(new Favourite[0]);
+        Favourite[] favourites = IFavouriteRepository.findAllByUserId(user).toArray(new Favourite[0]);
 
         InfoShop[] infoShops = new InfoShop[favourites.length];
         for (int i = 0; i < favourites.length; i++) {
@@ -127,10 +127,10 @@ public class UserService {
         }
         InfoShopRequest[] infoShopRequests = new InfoShopRequest[favourites.length];
         for (int i = 0; i < infoShops.length; i++) {
-            ReviewEntity[] reviewEntityShop = reviewRepository.findAllById(infoShops[i]).toArray(new ReviewEntity[0]);
+            Review[] reviewShop = IReviewRepository.findAllById(infoShops[i]).toArray(new Review[0]);
             infoShopRequests[i] = infoShopRequest(infoShops[i]);
-            if(reviewEntityShop.length>0){
-                for (ReviewEntity entity : reviewEntityShop) {
+            if(reviewShop.length>0){
+                for (Review entity : reviewShop) {
                     count++;
                     sum = sum + entity.getBall();
                 }
@@ -152,19 +152,19 @@ public class UserService {
     }
 
     public void deleteFavourite(Long id) {
-        favouriteRepository.delete(favouriteRepository.findById(id).orElseThrow(() ->
+        IFavouriteRepository.delete(IFavouriteRepository.findById(id).orElseThrow(() ->
                 new UsernameNotFoundException("Улюблені не знайдено")));
     }
 
     public List<InfoShopRequest> selectAllShop() {
         int sum = 0, count = 0;
-        InfoShop[] infoShops = infoShopRepository.findAll().toArray(new InfoShop[0]);
+        InfoShop[] infoShops = IInfoShopRepository.findAll().toArray(new InfoShop[0]);
         InfoShopRequest[] infoShopRequests = new InfoShopRequest[infoShops.length];
         for (int i = 0; i < infoShops.length; i++) {
             InfoShopRequest infoShopRequest = new InfoShopRequest();
-            ReviewEntity[] reviewEntityShop = reviewRepository.findAllById(infoShops[i]).toArray(new ReviewEntity[0]);
-            if(reviewEntityShop.length>0){
-                for (ReviewEntity entity : reviewEntityShop) {
+            Review[] reviewShop = IReviewRepository.findAllById(infoShops[i]).toArray(new Review[0]);
+            if(reviewShop.length>0){
+                for (Review entity : reviewShop) {
                         count++;
                         sum = sum + entity.getBall();
                 }
@@ -201,7 +201,7 @@ public class UserService {
     }
 
     public List<KategoryDto> selectallKategory() {
-        Kategory[] kategories = kategoryRepository.findAll().toArray(new Kategory[0]);
+        Kategory[] kategories = ICategoryRepository.findAll().toArray(new Kategory[0]);
         KategoryDto[] kategoryDtos = new KategoryDto[kategories.length];
         if(kategories.length>0){
             for (int i = 0; i < kategories.length; i++) {
@@ -217,11 +217,11 @@ public class UserService {
 
     public InfoShopRequest findShop(Long id) {
         int sum = 0, count = 0;
-        InfoShop infoShop = infoShopRepository.findById(id).orElseThrow(() ->
+        InfoShop infoShop = IInfoShopRepository.findById(id).orElseThrow(() ->
                 new UsernameNotFoundException("Магазин не знайдено"));
-        ReviewEntity[] reviewEntityShop = reviewRepository.findAllById(infoShop).toArray(new ReviewEntity[0]);
-        if(reviewEntityShop.length>0){
-            for (ReviewEntity entity : reviewEntityShop) {
+        Review[] reviewShop = IReviewRepository.findAllById(infoShop).toArray(new Review[0]);
+        if(reviewShop.length>0){
+            for (Review entity : reviewShop) {
                     count++;
                     sum = sum + entity.getBall();
             }
@@ -258,14 +258,14 @@ public class UserService {
 
     public InfoShopRequest findShopForUser(Long id,String username) {
         int sum = 0, count = 0;
-        InfoShop infoShop = infoShopRepository.findById(id).orElseThrow(() ->
+        InfoShop infoShop = IInfoShopRepository.findById(id).orElseThrow(() ->
                 new UsernameNotFoundException("Магазин не знайдено"));
-        UserEntity user = userRepository.findByUserName(username).orElseThrow(() ->
+        User user = IUserRepository.findByUserName(username).orElseThrow(() ->
                 new UsernameNotFoundException("Користувача не знайдено"));
-        ReviewEntity[] reviewEntityShop = reviewRepository.findAllById(infoShop).toArray(new ReviewEntity[0]);
-        Favourite [] favourites= favouriteRepository.findAllByUserId(user).toArray(new Favourite[0]);
-        if(reviewEntityShop.length>0){
-            for (ReviewEntity entity : reviewEntityShop) {
+        Review[] reviewShop = IReviewRepository.findAllById(infoShop).toArray(new Review[0]);
+        Favourite [] favourites= IFavouriteRepository.findAllByUserId(user).toArray(new Favourite[0]);
+        if(reviewShop.length>0){
+            for (Review entity : reviewShop) {
                 count++;
                 sum = sum + entity.getBall();
             }
@@ -308,17 +308,17 @@ public class UserService {
     }
 
     public List<InfoShopRequest> findByKategory(Long id){
-        Kategory kategory= kategoryRepository.findById(id).orElseThrow(() ->
+        Kategory kategory= ICategoryRepository.findById(id).orElseThrow(() ->
                 new UsernameNotFoundException("Магазин не знайдено"));
-        InfoShop[] infoShops=infoShopRepository.findAllByKategoryName(kategory).toArray(new InfoShop[0]);
+        InfoShop[] infoShops= IInfoShopRepository.findAllByKategoryName(kategory).toArray(new InfoShop[0]);
         InfoShopRequest[] infoShopRequests = new InfoShopRequest[infoShops.length];
         int sum = 0, count = 0;
 
         for(int i=0;i<infoShops.length;i++){
             InfoShopRequest infoShopRequest =  new InfoShopRequest();
-            ReviewEntity[] reviewEntityShop = reviewRepository.findAllById(infoShops[i]).toArray(new ReviewEntity[0]);
-            if(reviewEntityShop.length>0){
-                for (ReviewEntity entity : reviewEntityShop) {
+            Review[] reviewShop = IReviewRepository.findAllById(infoShops[i]).toArray(new Review[0]);
+            if(reviewShop.length>0){
+                for (Review entity : reviewShop) {
                     count++;
                     sum = sum + entity.getBall();
                 }
@@ -355,20 +355,20 @@ public class UserService {
     }
 
     public List<InfoShopRequest> findByKategoryForUser(Long id,String username){
-        Kategory kategory= kategoryRepository.findById(id).orElseThrow(() ->
+        Kategory kategory= ICategoryRepository.findById(id).orElseThrow(() ->
                 new UsernameNotFoundException("Магазин не знайдено"));
-        UserEntity user = userRepository.findByUserName(username).orElseThrow(() ->
+        User user = IUserRepository.findByUserName(username).orElseThrow(() ->
                 new UsernameNotFoundException("Користувача не знайдено"));
-        InfoShop[] infoShops=infoShopRepository.findAllByKategoryName(kategory).toArray(new InfoShop[0]);
+        InfoShop[] infoShops= IInfoShopRepository.findAllByKategoryName(kategory).toArray(new InfoShop[0]);
         InfoShopRequest[] infoShopRequests = new InfoShopRequest[infoShops.length];
         int sum = 0, count = 0;
 
         for(int i=0;i<infoShops.length;i++){
-            Favourite [] favourites= favouriteRepository.findAllByUserId(user).toArray(new Favourite[0]);
+            Favourite [] favourites= IFavouriteRepository.findAllByUserId(user).toArray(new Favourite[0]);
             InfoShopRequest infoShopRequest =  new InfoShopRequest();
-            ReviewEntity[] reviewEntityShop = reviewRepository.findAllById(infoShops[i]).toArray(new ReviewEntity[0]);
-            if(reviewEntityShop.length>0){
-                for (ReviewEntity entity : reviewEntityShop) {
+            Review[] reviewShop = IReviewRepository.findAllById(infoShops[i]).toArray(new Review[0]);
+            if(reviewShop.length>0){
+                for (Review entity : reviewShop) {
                     count++;
                     sum = sum + entity.getBall();
                 }
@@ -411,14 +411,14 @@ public class UserService {
     }
 
     public void favourite(String username, Long id) {
-        UserEntity userEntity = userRepository.findByUserName(username).orElseThrow(() ->
+        User user = IUserRepository.findByUserName(username).orElseThrow(() ->
                 new UsernameNotFoundException("Користувача не знайдено"));
-        InfoShop infoShop = infoShopRepository.findById(id).orElseThrow(() ->
+        InfoShop infoShop = IInfoShopRepository.findById(id).orElseThrow(() ->
                 new UsernameNotFoundException("Магазин не знайдено"));
         Favourite favourite = new Favourite();
         favourite.setId_shop(infoShop);
-        favourite.setId_users(userEntity);
-        favouriteRepository.save(favourite);
+        favourite.setId_users(user);
+        IFavouriteRepository.save(favourite);
     }
 
     public InfoShopRequest[] getallFacult(String username){

@@ -1,11 +1,9 @@
-package WebDiplom.InfoPage.Config;
+package WebDiplom.InfoPage.config;
 
-import WebDiplom.InfoPage.Models.PrivilegeEntity;
-import WebDiplom.InfoPage.Models.RoleEntity;
-import WebDiplom.InfoPage.Models.UserEntity;
-import WebDiplom.InfoPage.Repository.PrivilegeRepository;
-import WebDiplom.InfoPage.Repository.RoleRepository;
-import WebDiplom.InfoPage.Repository.UserRepository;
+import WebDiplom.InfoPage.models.Role;
+import WebDiplom.InfoPage.models.User;
+import WebDiplom.InfoPage.repository.IRoleRepository;
+import WebDiplom.InfoPage.repository.IUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
@@ -13,8 +11,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
 
 @Component
@@ -22,13 +21,11 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
     boolean alreadySetup = false;
 
     @Autowired
-    private UserRepository userRepository;
+    private IUserRepository IUserRepository;
 
     @Autowired
-    private RoleRepository roleRepository;
+    private IRoleRepository IRoleRepository;
 
-    @Autowired
-    private PrivilegeRepository privilegeRepository;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -39,50 +36,25 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
 
         if (alreadySetup)
             return;
-        PrivilegeEntity readPrivilege
-                = createPrivilegeIfNotFound("READ_PRIVILEGE");
-        PrivilegeEntity writePrivilege
-                = createPrivilegeIfNotFound("WRITE_PRIVILEGE");
+        createRoles();
 
-        List<PrivilegeEntity> adminPrivileges = Arrays.asList(
-                readPrivilege, writePrivilege);
-        createRoleIfNotFound("ROLE_ADMIN", adminPrivileges);
-        createRoleIfNotFound("ROLE_USER", Arrays.asList(readPrivilege));
-
-
-        if(!userRepository.findByUserName("Admin").isPresent()) {
-            RoleEntity adminRole = roleRepository.findByName("ROLE_ADMIN");
-            UserEntity user = new UserEntity();
-            user.setUserName("Admin");
-            user.setPassword(passwordEncoder.encode("admin"));
-
-            user.setRoles(Arrays.asList(adminRole));
-            userRepository.save(user);
+        if (!IUserRepository.findByUserName("Admin").isPresent()) {
+            Role adminRole = IRoleRepository.findByName(Role.ERole.ROLE_ADMIN).orElse(null);
+            User userEntity = new User();
+            userEntity.setUserName("Admin");
+            userEntity.setPassword(passwordEncoder.encode("admin"));
+            userEntity.setRoles(new HashSet<>(Arrays.asList(adminRole)));
+            IUserRepository.save(userEntity);
         }
         alreadySetup = true;
     }
 
-    @Transactional
-    PrivilegeEntity createPrivilegeIfNotFound(String name) {
-
-        PrivilegeEntity privilege = privilegeRepository.findByName(name);
-        if (privilege == null) {
-            privilege = new PrivilegeEntity(name);
-            privilegeRepository.save(privilege);
-        }
-        return privilege;
-    }
 
     @Transactional
-    RoleEntity createRoleIfNotFound(
-            String name, Collection<PrivilegeEntity> privileges) {
-
-        RoleEntity role = roleRepository.findByName(name);
-        if (role == null) {
-            role = new RoleEntity(name);
-            role.setPrivileges(privileges);
-            roleRepository.save(role);
-        }
-        return role;
+    void createRoles() {
+        Role admin = new Role(Role.ERole.ROLE_ADMIN);
+        Role user = new Role(Role.ERole.ROLE_USER);
+        IRoleRepository.save(admin);
+        IRoleRepository.save(user);
     }
 }

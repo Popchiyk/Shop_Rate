@@ -1,10 +1,10 @@
-package WebDiplom.InfoPage.Contollers;
+package WebDiplom.InfoPage.contollers;
 
-import WebDiplom.InfoPage.Service.ReviewService;
+import WebDiplom.InfoPage.service.ReviewService;
 import WebDiplom.InfoPage.dto.ReviewDto;
 import WebDiplom.InfoPage.dto.UserRequestLoginAndPassword;
 import WebDiplom.InfoPage.dto.UserRequestUpdateData;
-import WebDiplom.InfoPage.Service.UserService;
+import WebDiplom.InfoPage.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/api/v1/user")
 public class UserController {
     @Autowired
     UserService userService;
