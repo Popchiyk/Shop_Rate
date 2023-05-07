@@ -19,14 +19,13 @@ public class AuthController {
     private AuthService authService;
 
     @PostMapping("/signup")
-    public ResponseEntity signup(@RequestBody RegisterRequest registerRequest) {
-        authService.signup(registerRequest);
-        return new ResponseEntity(HttpStatus.OK);
+    public ResponseEntity<?> signup(@RequestBody RegisterRequest registerRequest) {
+        return  ResponseEntity.ok(authService.signup(registerRequest));
     }
 
     @PostMapping("/login")
-    public LoginResponse login(@RequestBody LoginRequest loginRequest) {
-        return authService.authenticateRequest(loginRequest);
+    public ResponseEntity<?> authenticate(@RequestBody LoginRequest request) {
+        return ResponseEntity.ok(authService.authenticateRequest(request));
     }
 
     @PutMapping("/update/login/password/{username}")

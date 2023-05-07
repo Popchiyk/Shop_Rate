@@ -11,7 +11,7 @@ import { Userfullinfo } from './Classes/UserFullInfo';
   providedIn: 'root'
 })
 export class AdminService {
-  ipv4="localhost:8081";
+  ipv4="localhost:8081/api/v1";
   constructor(private http:HttpClient) { }
 
  

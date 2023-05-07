@@ -32,7 +32,7 @@ public class AuthService {
     private final IRoleRepository roleRepository;
 
 
-    public String signup(RegisterRequest registerRequest) {
+    public User signup(RegisterRequest registerRequest) {
 
         if (userRepository.existsByUserName(registerRequest.getUsername())) {
             throw new IllegalArgumentException("Username " + registerRequest.getUsername() + " already exist");
@@ -50,7 +50,7 @@ public class AuthService {
                 .lastname(registerRequest.getLastname())
                 .build();
         userRepository.save(user);
-        return "User was successfully created";
+        return user;
     }
 
     public void UpdateLoginAndPassword(String username, UserRequestLoginAndPassword userRequestLoginAndPassword) {
@@ -77,7 +77,8 @@ public class AuthService {
         var roles = details.getAuthorities().stream()
                 .map(GrantedAuthority::getAuthority)
                 .collect(Collectors.toList());
-
+//        StringBuilder rl = new StringBuilder();
+//        rl.append(roles);
         return LoginResponse.builder()
                 .jwt(jwt)
                 .username(details.getUsername())

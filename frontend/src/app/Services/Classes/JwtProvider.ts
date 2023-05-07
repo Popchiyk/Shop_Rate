@@ -1,5 +1,5 @@
 export class JwtToken{
-   authenticationToken:string;
+   jwt:string;
    username:string;
-   role:string;
+   roles:any;
 }

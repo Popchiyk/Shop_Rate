@@ -53,7 +53,8 @@
                </li>
            </ul>
            <ul *ngIf="isLogin">
-            <li style="color: black; font-weight: 400;">{{username}}</li>
+            <li *ngIf="!isAdmin" style="color: black; font-weight: 400;">{{username}}</li>
+            <li *ngIf="isAdmin" style="color: black; font-weight: 400;"><a href="/admin">{{username}}</a></li>
             <li class="logo" data-bs-toggle="modal" data-bs-target="#exampleModal">  <img *ngIf="!isImg" alt="" src="../../assets/images/Anonimus.svg">
             <img  *ngIf="isImg" alt="" [src]="user.logo"></li>
            </ul>

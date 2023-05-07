@@ -26,9 +26,11 @@ export class MainComponent implements OnInit {
   selectedfile:File;
   isRating:boolean;
   isImg:boolean;
+  isAdmin:boolean;
   img:any;
   ngOnInit(): void {
         this.username = this.authService.isLogin('username');
+   
     if(this.username){
      this.UserInfo();
      this.GetAllForUser();
@@ -88,6 +90,13 @@ export class MainComponent implements OnInit {
       }
       if(this.username != null){
         this.isLogin = true;
+        this.isAdmin = false;
+      }
+      if(this.username==='Admin'){
+        this.isAdmin = true;
+        console.log(this.isAdmin)
+      }else{
+        this.isAdmin = false;
       }
    });
   }

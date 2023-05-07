@@ -1,5 +1,6 @@
 package WebDiplom.InfoPage.dto;
 
+import WebDiplom.InfoPage.models.Role;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

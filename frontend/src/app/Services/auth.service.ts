@@ -9,16 +9,16 @@ import { RegistrashionRequest } from './Classes/RegistrashionRequest';
   providedIn: 'root'
 })
 export class AuthService {
-  ipv4="localhost:8081";
+  ipv4="localhost:8081/api/v1";
   constructor(private http:HttpClient) { }
   public registrashion(registrashionUser:RegistrashionRequest):Observable<any>{
     return this.http.post('http://'+this.ipv4+'/auth/signup',registrashionUser);
   }
   public login(loginRequest:LoginRequest):Observable<boolean>{
     return this.http.post<JwtToken>('http://'+this.ipv4+'/auth/login',loginRequest).pipe(map(data=>{
-      document.cookie="token="+data.authenticationToken;
+      document.cookie="token="+data.jwt;
       document.cookie="username="+data.username;
-      document.cookie="role="+data.role;
+      document.cookie="role="+data.roles;
       document.cookie="auth="+true;
       return true;
     }));

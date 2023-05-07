@@ -32,7 +32,7 @@ public class User {
     @Lob
     @Column(columnDefinition = "MEDIUMBLOB")
     private String logo;
-    @OneToMany
+    @ManyToMany
     private Set<Role> roles;
 
 
