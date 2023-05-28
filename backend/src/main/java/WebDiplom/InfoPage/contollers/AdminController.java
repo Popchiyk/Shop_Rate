@@ -90,4 +90,14 @@ public class AdminController {
         adminService.DeleteReview(id);
         return  new ResponseEntity(HttpStatus.OK);
     }
+
+    @GetMapping("/stats")
+    public  ResponseEntity getCountStats(){
+        return  new ResponseEntity(  adminService.getCountStats(),HttpStatus.OK);
+    }
+
+    @GetMapping("/chart")
+    public  ResponseEntity getDateAndCountReview(){
+        return  new ResponseEntity(  adminService.getCountAndDate(),HttpStatus.OK);
+    }
 }

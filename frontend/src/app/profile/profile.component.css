@@ -2,6 +2,12 @@ ol, ul{
    padding-left: 0;
 }
 
+
+
+main{
+   padding-bottom: 99px;
+}
+
 .content{
    max-width: 1170px;
    display: flex;

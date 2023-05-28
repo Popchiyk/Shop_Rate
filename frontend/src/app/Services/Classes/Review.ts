@@ -3,10 +3,10 @@ export class Review{
    ball:number;
    data:string;
    text:string;
-   username:string;
+   id_user:number;
    name:string;
    logo:string;
    surname:string;
    id_shop:number;
    header:string;
-}
+}  

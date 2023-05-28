@@ -1,12 +1,16 @@
+
+
 *{
-   padding: 0;
    margin: 0;
+   padding: 0;
 }
 
 body{
   height: 100%;
   overflow-y: auto;
+  
 }
+
 
 header {
    left: 132px;
@@ -23,6 +27,7 @@ header {
 main{
    max-width: 1170px;
    margin-left: 133px;
+   padding-bottom: 100px;
 }
 .container{
    width: 100%;

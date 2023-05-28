@@ -73,7 +73,7 @@ public class UserController {
 
     @GetMapping("/getall/shop/{username}")
     public ResponseEntity getall(@PathVariable ("username") String username){
-    return  new ResponseEntity(userService.getallFacult(username),HttpStatus.OK);
+    return  new ResponseEntity(userService.getAllShops(username),HttpStatus.OK);
     }
 
     @GetMapping("/find/user/{username}/{id}")

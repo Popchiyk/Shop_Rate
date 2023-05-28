@@ -3,6 +3,12 @@
    margin: 0;
 }
 
+body{
+   height: 100%;
+}
+main{
+   padding-bottom: 148px;
+}
 .burger{
    display: none;
 } 

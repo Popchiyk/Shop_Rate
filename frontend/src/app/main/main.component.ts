@@ -94,7 +94,6 @@ export class MainComponent implements OnInit {
       }
       if(this.username==='Admin'){
         this.isAdmin = true;
-        console.log(this.isAdmin)
       }else{
         this.isAdmin = false;
       }

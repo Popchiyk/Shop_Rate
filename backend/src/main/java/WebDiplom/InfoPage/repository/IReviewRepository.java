@@ -13,4 +13,10 @@ public interface IReviewRepository extends JpaRepository<Review,Long> {
     List<Review> findAllByShopId(@Param("id_shop") InfoShop id_shop);
     @Query(value = "select b from Review b where b.id_shop = :id_shop")
     List<Review> findAllById(@Param("id_shop") InfoShop id_shop);
+    @Query("SELECT r.data FROM Review r")
+    List<String> getData();
+
+    @Query("SELECT COUNT(r.data), r.data FROM Review r GROUP BY r.data")
+    List<Object[]> getDataWithCount();
+
 }

@@ -8,6 +8,10 @@ body{
  
 }
 
+main{
+   padding-bottom: 150px;
+}
+
 button{
    outline: none;
 }

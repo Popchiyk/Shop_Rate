@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { ChartModule } from 'primeng/chart';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { RegistrashionComponent } from './registrashion/registrashion.component';
@@ -26,6 +26,7 @@ import { FooterforadminComponent } from './adminka/footerforadmin/footerforadmin
 import { AdminkaGuard } from './Services/adminka.guard';
 import { AddComponent } from './adminka/add/add.component';
 import { UpdateComponent } from './adminka/update/update.component';
+import { ChartsComponent } from './charts/charts.component';
 
 const routes:Routes=[
   {
@@ -33,6 +34,9 @@ const routes:Routes=[
   },
   {
     path:'main',component:MainComponent
+  },
+  {
+    path:'chart',component:ChartsComponent
   },
   {
     path:'main/:name',component:MainComponent
@@ -113,10 +117,12 @@ const routes:Routes=[
     FooterforadminComponent,
     AddComponent,
     UpdateComponent,
+    ChartsComponent,
   ],
   imports: [
     BrowserModule,
     FormsModule,
+    ChartModule,
     ReactiveFormsModule,
     RouterModule.forRoot(routes),
     HttpClientModule,

@@ -44,21 +44,22 @@ findkategory:Kategory;
     }
    }
 
-  ngOnInit(): void {
-    this._router.params.subscribe(params=>{
-      if(params['name']=="shops"){
-        this.isShops=true;
-        this.idShop = parseInt (params['id'])
-        this.GetFindInfoShop(this.idShop)
+   ngOnInit(): void {
+    this._router.params.subscribe(params => {
+      const name = params['name'];
+  
+      if (name === 'shops') {
+        this.isShops = true;
+        this.idShop = parseInt(params['id']);
+        this.GetFindInfoShop(this.idShop);
         this.GetAllKategory();
+      } else if (name === 'kategory') {
+        this.isKategory = true;
+        console.log(true);
+        const id = parseInt(params['id']);
+        this.GetFindKategory(id);
       }
-      if(params['name']=='kategory'){
-        this.isKategory=true;
-        console.log(true)
-        let id = parseInt(params['id'])
-        this.GetFindKategory(id)
-      }
-    })
+    });
   }
 
   GetAllKategory(){

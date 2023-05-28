@@ -6,12 +6,14 @@ import { Review } from './Classes/Review';
 import { Shop } from './Classes/Shop';
 import { ShopRequest } from './Classes/ShopRequest';
 import { Userfullinfo } from './Classes/UserFullInfo';
+import { StatsDTO } from './Classes/StatsDTO';
+import { ChartDTO } from './Classes/ChartDTO';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AdminService {
-  ipv4="localhost:8081/api/v1";
+  ipv4="localhost:8080/api/v1";
   constructor(private http:HttpClient) { }
 
  
@@ -73,5 +75,13 @@ export class AdminService {
 
   public DeleteReview(id:number):Observable<void>{
     return this.http.delete<void>('http://'+this.ipv4+'/admin/delete/review/'+id)
+  }
+
+  public StatsCount():Observable<StatsDTO>{
+    return this.http.get<StatsDTO>('http://'+this.ipv4+'/admin/stats')
+  }
+
+  public ChartStats():Observable<any>{
+    return this.http.get<any>('http://'+this.ipv4+'/admin/chart')
   }
 }

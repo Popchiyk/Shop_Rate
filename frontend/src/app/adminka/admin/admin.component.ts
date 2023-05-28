@@ -2,9 +2,11 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AdminService } from 'src/app/Services/admin.service';
+import { ChartDTO } from 'src/app/Services/Classes/ChartDTO';
 import { Kategory } from 'src/app/Services/Classes/Kategory';
 import { Review } from 'src/app/Services/Classes/Review';
 import { Shop } from 'src/app/Services/Classes/Shop';
+import { StatsDTO } from 'src/app/Services/Classes/StatsDTO';
 import { Userfullinfo } from 'src/app/Services/Classes/UserFullInfo';
 
 @Component({
@@ -23,39 +25,40 @@ shop:Shop[]
 users:Userfullinfo[];
 kategory:Kategory;
 review:Review;
+stats:StatsDTO
+charts:ChartDTO
   constructor(private router:ActivatedRoute,private adminservice:AdminService) { }
 
   ngOnInit(): void {
-    this.router.params.subscribe(params=>{
-      if(params['name']=='review'){
-        this.isTableReview=true;
-        this.isTableUsers=false;
-        this.isTableInfoShop=false;
-        this.isTableKategory=false;
-        this.GetAllReview();
+   
+    this.router.params.subscribe(params => {
+      this.isTableReview = false;
+      this.isTableUsers = false;
+      this.isTableInfoShop = false;
+      this.isTableKategory = false;
+  
+      switch (params['name']) {
+        case 'review':
+          this.isTableReview = true;
+          this.GetAllReview();
+          break;
+        case 'users':
+          this.isTableUsers = true;
+          this.GetAllUsers();
+          break;
+        case 'infoshop':
+          this.isTableInfoShop = true;
+          this.GetAllShop();
+          break;
+        case 'kategory':
+          this.isTableKategory = true;
+          this.GetAllKategory();
+          break;
+          default :
+          this.GetStats();
+          break;
       }
-      if(params['name']=='users'){
-        this.isTableUsers=true;
-        this.isTableReview=false;
-        this.isTableInfoShop=false;
-        this.isTableKategory=false;
-        this.GetAllUsers();
-      }
-      if(params['name']=='infoshop'){
-        this.isTableInfoShop=true;
-        this.isTableReview=false;
-        this.isTableUsers=false;
-        this.isTableKategory=false;
-        this.GetAllShop();
-      }
-      if(params['name']=='kategory'){
-        this.isTableInfoShop=false;
-        this.isTableReview=false;
-        this.isTableUsers=false;
-        this.isTableKategory=true;
-        this.GetAllKategory();
-      }
-    })
+    });
   }
   
   GetAllShop(){
@@ -85,6 +88,7 @@ review:Review;
   GetAllReview(){
     this.adminservice.GetAllReview().subscribe(data=>{
       this.review=data;
+      
     })
   }
 
@@ -144,4 +148,12 @@ review:Review;
        }, 3000);
     })
   }
+
+  GetStats(){
+    this.adminservice.StatsCount().subscribe(data=>{
+      this.stats=data;
+    })
+  }
+
+
 }

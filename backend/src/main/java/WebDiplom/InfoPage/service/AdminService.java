@@ -4,14 +4,18 @@ import WebDiplom.InfoPage.models.*;
 import WebDiplom.InfoPage.repository.*;
 import WebDiplom.InfoPage.dto.RoleDto;
 import WebDiplom.InfoPage.dto.*;
-    import org.springframework.beans.factory.annotation.Autowired;
+import org.hibernate.criterion.CriteriaQuery;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.Root;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.Base64;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class AdminService {
@@ -29,19 +33,21 @@ public class AdminService {
     @Autowired
     IReviewRepository IReviewRepository;
 
-    public List<KategoryDto> selectallKategory() {
-        Kategory[] kategories = ICategoryRepository.findAll().toArray(new Kategory[0]);
-        KategoryDto[] kategoryDtos = new KategoryDto[kategories.length];
-        if(kategories.length>0){
-            for (int i = 0; i < kategories.length; i++) {
-                KategoryDto kategoryDto = new KategoryDto();
-                kategoryDto.setId_kategory(kategories[i].getId_kategory());
-                kategoryDto.setName_kategory(kategories[i].getName_kategory());
-                kategoryDtos[i] = kategoryDto;
-            }
-
-        }
-        return Arrays.asList(kategoryDtos);
+    public List<Kategory> selectallKategory() {
+        return ICategoryRepository.findAll();
+        /**Old code**/
+//        Kategory[] kategories = ICategoryRepository.findAll().toArray(new Kategory[0]);
+//        KategoryDto[] kategoryDtos = new KategoryDto[kategories.length];
+//        if(kategories.length>0){
+//            for (int i = 0; i < kategories.length; i++) {
+//                KategoryDto kategoryDto = new KategoryDto();
+//                kategoryDto.setId_kategory(kategories[i].getId_kategory());
+//                kategoryDto.setName_kategory(kategories[i].getName_kategory());
+//                kategoryDtos[i] = kategoryDto;
+//            }
+//
+//        }
+//        return Arrays.asList(kategoryDtos);
     }
 
     public List<InfoShopRequest> selectAllShop() {
@@ -89,45 +95,41 @@ public class AdminService {
     }
 
 
-    public List<ReviewRequest> selectallreview(){
-        Review[] reviewEntities = IReviewRepository.findAll().toArray(new Review[0]);
-        ReviewRequest[] reviewRequests = new ReviewRequest[reviewEntities.length];
-        for(int i=0;i<reviewEntities.length;i++){
-            ReviewRequest reviewRequest= new ReviewRequest();
-            reviewRequest.setId(reviewEntities[i].getId());
-            reviewRequest.setId_shop(reviewEntities[i].getId_shop().getId());
-            reviewRequest.setText(reviewEntities[i].getText());
-            reviewRequest.setBall(reviewEntities[i].getBall());
-            reviewRequest.setUsername(reviewEntities[i].getId_user().getUserName());
-            reviewRequest.setLogo(reviewEntities[i].getId_user().getLogo());
-            reviewRequest.setName(reviewEntities[i].getId_user().getName());
-            reviewRequest.setHeader(reviewEntities[i].getHeader());
-            reviewRequest.setSurname(reviewEntities[i].getId_user().getSurname());
-            reviewRequest.setData(reviewEntities[i].getData());
-            reviewRequests[i]=reviewRequest;
-        }
-        return Arrays.asList(reviewRequests);
+    public List<Review> selectallreview(){
+        return IReviewRepository.findAll();
+        /**Old code**/
+//        Review[] reviewEntities = IReviewRepository.findAll().toArray(new Review[0]);
+//        ReviewRequest[] reviewRequests = new ReviewRequest[reviewEntities.length];
+//        for(int i=0;i<reviewEntities.length;i++){
+//            ReviewRequest reviewRequest= new ReviewRequest();
+//            reviewRequest.setId(reviewEntities[i].getId());
+//            reviewRequest.setId_shop(reviewEntities[i].getId_shop().getId());
+//            reviewRequest.setText(reviewEntities[i].getText());
+//            reviewRequest.setBall(reviewEntities[i].getBall());
+//            reviewRequest.setUsername(reviewEntities[i].getId_user().getUserName());
+//            reviewRequest.setLogo(reviewEntities[i].getId_user().getLogo());
+//            reviewRequest.setName(reviewEntities[i].getId_user().getName());
+//            reviewRequest.setHeader(reviewEntities[i].getHeader());
+//            reviewRequest.setSurname(reviewEntities[i].getId_user().getSurname());
+//            reviewRequest.setData(reviewEntities[i].getData());
+//            reviewRequests[i]=reviewRequest;
+//        }
+//        return Arrays.asList(reviewRequests);
     }
 
-    public List<UserFullInfoDto> selectalluser(){
-        User[] userEntities = IUserRepository.findAll().toArray(new User[0]);
-        UserFullInfoDto[] userFullInfoDto = new UserFullInfoDto[userEntities.length];
-        for(int i=0;i<userEntities.length;i++){
-            UserFullInfoDto userFullInfoDto1 = new UserFullInfoDto();
-//            userFullInfoDto1.setId(userEntities[i].getId());
-            userFullInfoDto1.setLogin(userEntities[i].getUserName());
-            userFullInfoDto1.setEmail(userEntities[i].getEmail());
-            userFullInfoDto1.setLastname(userEntities[i].getLastname());
-            userFullInfoDto1.setName(userEntities[i].getName());
-            byte[] bytesEncoded = Base64.getEncoder().encode(userEntities[i].getPassword().getBytes(StandardCharsets.UTF_8));
-            byte [] barr = Base64.getDecoder().decode(bytesEncoded);
-            userFullInfoDto1.setPassword(userEntities[i].getPassword());
-            userFullInfoDto1.setSurname(userEntities[i].getSurname());
-            userFullInfoDto1.setPhone(userEntities[i].getPhone());
-            userFullInfoDto1.setLogo(userEntities[i].getLogo());
-            userFullInfoDto[i]=userFullInfoDto1;
-        }
-        return Arrays.asList(userFullInfoDto);
+    public List<UserFullInfoDto> selectalluser() {
+        return IUserRepository.findAll().stream().map(user -> {
+            UserFullInfoDto dto = new UserFullInfoDto();
+            dto.setLogin(user.getUserName());
+            dto.setEmail(user.getEmail());
+            dto.setLastname(user.getLastname());
+            dto.setName(user.getName());
+            dto.setPassword(Base64.getEncoder().encodeToString(user.getPassword().getBytes(StandardCharsets.UTF_8)));
+            dto.setSurname(user.getSurname());
+            dto.setPhone(user.getPhone());
+            dto.setLogo(user.getLogo());
+            return dto;
+        }).collect(Collectors.toList());
     }
 
     public RoleDto roleEntityToDto(Role roleEntity){
@@ -204,6 +206,23 @@ public class AdminService {
     public void DeleteUser(Long id){
         IUserRepository.delete(IUserRepository.findById(id).orElseThrow(() ->
                 new RuntimeException("Категорія не знайдено")));
+    }
+
+    public StatsDTO getCountStats(){
+     return  new StatsDTO((int)IUserRepository.count(),(int)IReviewRepository.count(),(int)IInfoShopRepository.count());
+    }
+
+
+    public List<Object[]> getCountAndDate() {
+        List<Object[]> result = IReviewRepository.getDataWithCount();
+        result = result.subList(0, Math.min(result.size(), 1000)); // Limit the number of results to 1000
+
+        for (Object[] row : result) {
+            Long count = (Long) row[0];
+            String data = (String) row[1];
+            // Do something with the count and data
+        }
+        return result;
     }
 
 }

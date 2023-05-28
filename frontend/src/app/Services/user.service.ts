@@ -15,7 +15,7 @@ import { UserInfoRequest } from './Classes/UserRequestInfo';
   providedIn: 'root'
 })
 export class UserService {
-  ipv4="localhost:8081/api/v1";
+  ipv4="localhost:8080/api/v1";
   constructor(private http:HttpClient,private authService:AuthService) { }
   
   public UserInfo():Observable<UserDataInfo>{

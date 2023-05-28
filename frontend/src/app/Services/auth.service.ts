@@ -9,7 +9,7 @@ import { RegistrashionRequest } from './Classes/RegistrashionRequest';
   providedIn: 'root'
 })
 export class AuthService {
-  ipv4="localhost:8081/api/v1";
+  ipv4="localhost:8080/api/v1";
   constructor(private http:HttpClient) { }
   public registrashion(registrashionUser:RegistrashionRequest):Observable<any>{
     return this.http.post('http://'+this.ipv4+'/auth/signup',registrashionUser);

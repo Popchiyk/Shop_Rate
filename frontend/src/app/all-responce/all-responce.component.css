@@ -1,9 +1,13 @@
 main{
    max-width: 1170px;
+   padding-bottom: 150px;
    margin-left: 95px;
 }
 ul{
    padding: 0;
+}
+body{
+   height: 100%;
 }
 
 .content_link_list{

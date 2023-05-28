@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class ReviewService {
@@ -39,25 +40,26 @@ public class ReviewService {
             IReviewRepository.save(review);
     }
 
-        public List<ReviewRequest>  findReviewById(Long id){
-            InfoShop infoShop = IInfoShopRepository.findById(id).orElseThrow(() -> new RuntimeException("Магази не знайдено"));
-            Review[] reviewEntities = IReviewRepository.findAllByShopId(infoShop).toArray(new Review[0]);
-            ReviewRequest[] reviewRequests = new ReviewRequest[reviewEntities.length];
-            for(int i=0;i<reviewEntities.length;i++){
-                    ReviewRequest reviewRequest= new ReviewRequest();
-                    reviewRequest.setId(reviewEntities[i].getId());
-                    reviewRequest.setId_shop(reviewEntities[i].getId_shop().getId());
-                    reviewRequest.setText(reviewEntities[i].getText());
-                    reviewRequest.setBall(reviewEntities[i].getBall());
-                    reviewRequest.setUsername(reviewEntities[i].getId_user().getUserName());
-                    reviewRequest.setLogo(reviewEntities[i].getId_user().getLogo());
-                    reviewRequest.setName(reviewEntities[i].getId_user().getName());
-                    reviewRequest.setHeader(reviewEntities[i].getHeader());
-                    reviewRequest.setSurname(reviewEntities[i].getId_user().getSurname());
-                    reviewRequest.setData(reviewEntities[i].getData());
-                    reviewRequests[i]=reviewRequest;
-            }
-            return Arrays.asList(reviewRequests);
+    public List<ReviewRequest> findReviewById(Long id) {
+        InfoShop infoShop = IInfoShopRepository.findById(id).orElseThrow(() -> new RuntimeException("Магази не знайдено"));
+        return IReviewRepository.findAllByShopId(infoShop).stream()
+                .map(this::mapReviewEntityToReviewRequest)
+                .collect(Collectors.toList());
+    }
+
+    private ReviewRequest mapReviewEntityToReviewRequest(Review entity) {
+        ReviewRequest reviewRequest = new ReviewRequest();
+        reviewRequest.setId(entity.getId());
+        reviewRequest.setId_shop(entity.getId_shop().getId());
+        reviewRequest.setText(entity.getText());
+        reviewRequest.setBall(entity.getBall());
+        reviewRequest.setUsername(entity.getId_user().getUserName());
+        reviewRequest.setLogo(entity.getId_user().getLogo());
+        reviewRequest.setName(entity.getId_user().getName());
+        reviewRequest.setHeader(entity.getHeader());
+        reviewRequest.setSurname(entity.getId_user().getSurname());
+        reviewRequest.setData(entity.getData());
+        return reviewRequest;
     }
 
 }

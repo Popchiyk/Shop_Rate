@@ -1,5 +1,5 @@
 main{
-   max-width: 1170px;
+   max-width: 1920px;
    margin-left: 95px;
 }
 ul{
@@ -59,6 +59,7 @@ ul{
 .shop_block{
    width: 1250px;
    height: 139px;
+   margin-left: 200px;
    margin-top: 57px;
    background: #FAFAFA;
    box-shadow: 0px 15px 20px rgba(0, 0, 0, 0.05);
@@ -160,7 +161,6 @@ ul{
 
 .content_responce{
    margin-top: 84px;
-   margin-left: 150px;
 }
 
 .stats_user{
@@ -528,6 +528,7 @@ textarea {
    .shop_block{
       width: 350px;
       height: 320px;
+      margin-left: 0px;
    }
 
    .content_link_list li::after{
