@@ -4,12 +4,14 @@ public class StatsDTO {
     private int countUsers;
     private int countReview;
     private int countShop;
+    private int countCategory;
 
 
-    public StatsDTO(int countUsers, int countReview, int countShop) {
+    public StatsDTO(int countUsers, int countReview, int countShop, int countCategory) {
         this.countUsers = countUsers;
         this.countReview = countReview;
         this.countShop = countShop;
+        this.countCategory = countCategory;
     }
 
     public StatsDTO() {
@@ -37,5 +39,13 @@ public class StatsDTO {
 
     public void setCountShop(int countShop) {
         this.countShop = countShop;
+    }
+
+    public int getCountCategory() {
+        return countCategory;
+    }
+
+    public void setCountCategory(int countCategory) {
+        this.countCategory = countCategory;
     }
 }

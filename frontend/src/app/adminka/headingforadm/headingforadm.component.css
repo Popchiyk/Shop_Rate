@@ -18,3 +18,16 @@ a{
 .username{
    text-transform: uppercase;
 }
+
+#color{
+   background-color: #474E95!important;
+   color: white!important;
+}
+
+.navbar-brand{
+   color: white!important;
+}
+
+.nav-link {
+   color: white!important;
+}

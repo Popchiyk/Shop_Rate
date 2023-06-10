@@ -209,7 +209,7 @@ public class AdminService {
     }
 
     public StatsDTO getCountStats(){
-     return  new StatsDTO((int)IUserRepository.count(),(int)IReviewRepository.count(),(int)IInfoShopRepository.count());
+     return  new StatsDTO((int)IUserRepository.count(),(int)IReviewRepository.count(),(int)IInfoShopRepository.count(),(int) ICategoryRepository.count());
     }
 
 

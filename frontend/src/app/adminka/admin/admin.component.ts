@@ -17,6 +17,7 @@ import { Userfullinfo } from 'src/app/Services/Classes/UserFullInfo';
 export class AdminComponent implements OnInit {
 isTableReview:boolean;
 isTableUsers:boolean;
+isStats:boolean;
 isSuccesful:boolean;
 isFail:boolean;
 isTableInfoShop:boolean;
@@ -26,16 +27,70 @@ users:Userfullinfo[];
 kategory:Kategory;
 review:Review;
 stats:StatsDTO
+basicData: any;
 charts:ChartDTO
+  basicOptions: any;
   constructor(private router:ActivatedRoute,private adminservice:AdminService) { }
 
   ngOnInit(): void {
-   
+    this.adminservice.ChartStats().subscribe(data => {
+      const labels = data.map(item=>  item[1]);
+      const values = data.map(item => item[0]);
+      const documentStyle = getComputedStyle(document.documentElement);
+  const textColor = documentStyle.getPropertyValue('--text-color');
+  const textColorSecondary = documentStyle.getPropertyValue('--text-color-secondary');
+  const surfaceBorder = documentStyle.getPropertyValue('--surface-border');
+
+  this.basicData = {
+      labels: labels,
+      datasets: [
+          {
+              label: 'Stats write review for shop',
+              data: values,
+              backgroundColor: ['rgba(255, 159, 64, 0.2)', 'rgba(75, 192, 192, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(153, 102, 255, 0.2)'],
+              borderColor: ['rgb(255, 159, 64)', 'rgb(75, 192, 192)', 'rgb(54, 162, 235)', 'rgb(153, 102, 255)'],
+              borderWidth: 1
+          }
+      ]
+  };
+
+  this.basicOptions = {
+      plugins: {
+          legend: {
+              labels: {
+                  color: textColor
+              }
+          }
+      },
+      scales: {
+          y: {
+              beginAtZero: true,
+              ticks: {
+                  color: textColorSecondary
+              },
+              grid: {
+                  color: surfaceBorder,
+                  drawBorder: false
+              }
+          },
+          x: {
+              ticks: {
+                  color: textColorSecondary
+              },
+              grid: {
+                  color: surfaceBorder,
+                  drawBorder: false
+              }
+          }
+      }
+  };
+    })
     this.router.params.subscribe(params => {
       this.isTableReview = false;
       this.isTableUsers = false;
       this.isTableInfoShop = false;
       this.isTableKategory = false;
+      this.isStats = false;
   
       switch (params['name']) {
         case 'review':
@@ -55,6 +110,7 @@ charts:ChartDTO
           this.GetAllKategory();
           break;
           default :
+          this.isStats = true;
           this.GetStats();
           break;
       }
