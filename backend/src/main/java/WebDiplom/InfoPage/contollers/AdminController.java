@@ -37,6 +37,11 @@ public class AdminController {
         return new ResponseEntity(adminService.selectallreview(), HttpStatus.OK);
     }
 
+    @GetMapping("/reviews/derevastion")
+    public ResponseEntity getderevastion() {
+        return new ResponseEntity(adminService.derevastion(), HttpStatus.OK);
+    }
+
     @PostMapping("/add/shop")
     public ResponseEntity addshop(@RequestBody ShopDto shopDto) {
         adminService.AddShop(shopDto);

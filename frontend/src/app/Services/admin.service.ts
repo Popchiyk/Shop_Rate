@@ -8,6 +8,7 @@ import { ShopRequest } from './Classes/ShopRequest';
 import { Userfullinfo } from './Classes/UserFullInfo';
 import { StatsDTO } from './Classes/StatsDTO';
 import { ChartDTO } from './Classes/ChartDTO';
+import { StatisticResult } from './Classes/StatisticsResult';
 
 @Injectable({
   providedIn: 'root'
@@ -83,5 +84,9 @@ export class AdminService {
 
   public ChartStats():Observable<any>{
     return this.http.get<any>('http://'+this.ipv4+'/admin/chart')
+  }
+
+  public Derivastion():Observable<StatisticResult>{
+    return this.http.get<StatisticResult>('http://'+this.ipv4+'/admin/reviews/derevastion')
   }
 }

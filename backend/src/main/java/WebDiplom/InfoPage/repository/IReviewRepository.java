@@ -19,4 +19,7 @@ public interface IReviewRepository extends JpaRepository<Review,Long> {
     @Query("SELECT COUNT(r.data), r.data FROM Review r GROUP BY r.data")
     List<Object[]> getDataWithCount();
 
+    @Query("Select r.ball FROM Review  r")
+    List<Integer> getRatings();
+
 }

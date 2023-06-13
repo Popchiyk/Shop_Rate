@@ -12,9 +12,7 @@ import org.springframework.stereotype.Service;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.Root;
 import java.nio.charset.StandardCharsets;
-import java.util.Arrays;
-import java.util.Base64;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -93,7 +91,22 @@ public class AdminService {
 
         return Arrays.asList(infoShopRequests);
     }
+    public List<StatisticsResult> derevastion() {
+        List<Integer> ratings = IReviewRepository.getRatings();
+        List<StatisticsResult> resultsList = new ArrayList<>();
 
+        for (int rating : ratings) {
+            int sum = rating;
+            double mean = (double) sum / rating;
+            double squaredDifferencesSum = Math.pow(rating - mean, 2);
+            double variance = squaredDifferencesSum / rating;
+            double standardDeviation = Math.sqrt(variance);
+
+            resultsList.add(new StatisticsResult(variance,standardDeviation));
+        }
+
+        return resultsList;
+    }
 
     public List<Review> selectallreview(){
         return IReviewRepository.findAll();

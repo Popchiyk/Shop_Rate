@@ -140,6 +140,8 @@
         <tr>
          <th scope="col">id</th>
           <th scope="col">ball</th>
+          <th scope="col">variance</th>
+          <th scope="col">standardDeviation</th>
           <th scope="col">data</th>
           <th scope="col">header</th>
           <th scope="col">text</th>
@@ -148,15 +150,17 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let reviews of review">
-          <th scope="row">{{reviews.id}}</th>
-          <td>{{reviews.ball}}</td>
-          <td>{{reviews.data}}</td>
-          <td>{{reviews.header}}</td>
+        <tr *ngFor="let data of combinedData1" >
+          <th scope="row">{{data.review?.id}}</th>
+          <td>{{data.review?.ball}}</td>
+          <td>{{data.derevastion?.variance}}</td>
+          <td>{{data.derevastion?.standardDeviation}}</td>
+          <td>{{data.review?.data}}</td>
+          <td>{{data.review?.header}}</td>
           <td style="max-width: 300px; white-space: nowrap; /* Запрещаем перенос строк */
-          overflow: hidden; /* Обрезаем все, что не помещается в область */text-overflow: ellipsis;">{{reviews.text}}</td>
-             <td>{{reviews.id_user.userName}}</td>
-             <td>{{reviews.id_shop.name_shop}}</td>
+          overflow: hidden; /* Обрезаем все, что не помещается в область */text-overflow: ellipsis;">{{data.review?.text}}</td>
+             <td>{{data.review?.id_user.userName}}</td>
+             <td>{{data.review?.id_shop.name_shop}}</td>
              <td><button type="button" class="btn btn-outline-danger" (click)="DeleteReview(reviews.id)">Видалити</button></td>
         </tr>
       </tbody>

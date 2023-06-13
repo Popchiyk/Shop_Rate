@@ -5,7 +5,9 @@ import { AdminService } from 'src/app/Services/admin.service';
 import { ChartDTO } from 'src/app/Services/Classes/ChartDTO';
 import { Kategory } from 'src/app/Services/Classes/Kategory';
 import { Review } from 'src/app/Services/Classes/Review';
+import { ReviewForAdmin } from 'src/app/Services/Classes/ReviewForAdmin';
 import { Shop } from 'src/app/Services/Classes/Shop';
+import { StatisticResult } from 'src/app/Services/Classes/StatisticsResult';
 import { StatsDTO } from 'src/app/Services/Classes/StatsDTO';
 import { Userfullinfo } from 'src/app/Services/Classes/UserFullInfo';
 
@@ -26,8 +28,11 @@ shop:Shop[]
 users:Userfullinfo[];
 kategory:Kategory;
 review:Review;
+reviewForAdmin:ReviewForAdmin
 stats:StatsDTO
 basicData: any;
+combinedData1:any[]
+statisticResult:StatisticResult
 charts:ChartDTO
   basicOptions: any;
   constructor(private router:ActivatedRoute,private adminservice:AdminService) { }
@@ -96,6 +101,7 @@ charts:ChartDTO
         case 'review':
           this.isTableReview = true;
           this.GetAllReview();
+          this.GetDerevastion()
           break;
         case 'users':
           this.isTableUsers = true;
@@ -143,8 +149,8 @@ charts:ChartDTO
 
   GetAllReview(){
     this.adminservice.GetAllReview().subscribe(data=>{
-      this.review=data;
       
+      this.review=data;
     })
   }
 
@@ -208,6 +214,23 @@ charts:ChartDTO
   GetStats(){
     this.adminservice.StatsCount().subscribe(data=>{
       this.stats=data;
+    })
+  }
+
+  GetDerevastion(){
+    this.adminservice.Derivastion().subscribe(data=>{
+      this.statisticResult=data;
+      let combinedData = [];
+      for (let i = 0; i < Object.keys(this.review).length; i++) {
+        let data = {
+          review: this.review[i],
+          derevastion: this.statisticResult[i]
+  };
+  combinedData.push(data);
+}
+console.log(combinedData)
+this.combinedData1 = combinedData;
+console.log(this.combinedData1)
     })
   }
 
