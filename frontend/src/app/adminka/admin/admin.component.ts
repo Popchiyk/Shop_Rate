@@ -101,7 +101,7 @@ charts:ChartDTO
         case 'review':
           this.isTableReview = true;
           this.GetAllReview();
-          this.GetDerevastion()
+          // 
           break;
         case 'users':
           this.isTableUsers = true;
@@ -149,8 +149,8 @@ charts:ChartDTO
 
   GetAllReview(){
     this.adminservice.GetAllReview().subscribe(data=>{
-      
       this.review=data;
+      this.GetDerevastion()
     })
   }
 
@@ -228,9 +228,7 @@ charts:ChartDTO
   };
   combinedData.push(data);
 }
-console.log(combinedData)
 this.combinedData1 = combinedData;
-console.log(this.combinedData1)
     })
   }
 

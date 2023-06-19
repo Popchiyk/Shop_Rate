@@ -33,19 +33,6 @@ public class AdminService {
 
     public List<Kategory> selectallKategory() {
         return ICategoryRepository.findAll();
-        /**Old code**/
-//        Kategory[] kategories = ICategoryRepository.findAll().toArray(new Kategory[0]);
-//        KategoryDto[] kategoryDtos = new KategoryDto[kategories.length];
-//        if(kategories.length>0){
-//            for (int i = 0; i < kategories.length; i++) {
-//                KategoryDto kategoryDto = new KategoryDto();
-//                kategoryDto.setId_kategory(kategories[i].getId_kategory());
-//                kategoryDto.setName_kategory(kategories[i].getName_kategory());
-//                kategoryDtos[i] = kategoryDto;
-//            }
-//
-//        }
-//        return Arrays.asList(kategoryDtos);
     }
 
     public List<InfoShopRequest> selectAllShop() {
@@ -110,29 +97,12 @@ public class AdminService {
 
     public List<Review> selectallreview(){
         return IReviewRepository.findAll();
-        /**Old code**/
-//        Review[] reviewEntities = IReviewRepository.findAll().toArray(new Review[0]);
-//        ReviewRequest[] reviewRequests = new ReviewRequest[reviewEntities.length];
-//        for(int i=0;i<reviewEntities.length;i++){
-//            ReviewRequest reviewRequest= new ReviewRequest();
-//            reviewRequest.setId(reviewEntities[i].getId());
-//            reviewRequest.setId_shop(reviewEntities[i].getId_shop().getId());
-//            reviewRequest.setText(reviewEntities[i].getText());
-//            reviewRequest.setBall(reviewEntities[i].getBall());
-//            reviewRequest.setUsername(reviewEntities[i].getId_user().getUserName());
-//            reviewRequest.setLogo(reviewEntities[i].getId_user().getLogo());
-//            reviewRequest.setName(reviewEntities[i].getId_user().getName());
-//            reviewRequest.setHeader(reviewEntities[i].getHeader());
-//            reviewRequest.setSurname(reviewEntities[i].getId_user().getSurname());
-//            reviewRequest.setData(reviewEntities[i].getData());
-//            reviewRequests[i]=reviewRequest;
-//        }
-//        return Arrays.asList(reviewRequests);
     }
 
     public List<UserFullInfoDto> selectalluser() {
         return IUserRepository.findAll().stream().map(user -> {
             UserFullInfoDto dto = new UserFullInfoDto();
+            dto.setId(user.getId());
             dto.setLogin(user.getUserName());
             dto.setEmail(user.getEmail());
             dto.setLastname(user.getLastname());
